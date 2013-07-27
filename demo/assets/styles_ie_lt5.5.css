@@ -1,0 +1,4 @@
+/*
+Styles for the demos - IE less than 5.5
+*/
+.msg_box {filter: alpha(opacity=90);}
