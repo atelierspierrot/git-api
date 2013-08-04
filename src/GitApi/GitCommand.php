@@ -25,7 +25,7 @@ class GitCommand extends Command
 	 * @param   string  command to run
 	 * @return  string
 	 */
-	public function run($command, $repository)
+    public function run($command, $repository = null, $force = false)
 	{
         list( $stdout, $status, $stderr ) = parent::run($command, $repository);
         if (!empty($stderr)) {

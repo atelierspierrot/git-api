@@ -185,6 +185,7 @@ class Repository
         $commit=array();
         $response_items = explode("\n", $log_entry);
         if (!empty($response_items)) {
+            $in_message = false;
             foreach ($response_items as $i=>$subentry) {
                 $entry_index = substr($subentry, 0, strpos($subentry, ':'));
                 $entry_value = substr($subentry, strpos($subentry, ':')+1);
@@ -832,7 +833,8 @@ class Repository
 	 */
 	public function getDescription() 
 	{
-		return file_get_contents($this->repository_path."/.git/description");
+	    $_f = $this->repository_path."/.git/description";
+		return file_exists($_f) ? file_get_contents($_f) : null;
 	}
 	
 }

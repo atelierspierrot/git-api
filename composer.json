@@ -2,9 +2,9 @@
     "name": "atelierspierrot/git-api",
     "type": "library",
     "description": "A PHP API to get infos and manage a GIT distant or local repository",
-    "keywords": [ "php", "VCS", "GIT" ],
+    "keywords": [ "VCS", "GIT" ],
     "homepage": "http://github.com/atelierspierrot/git-api",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "GPL-3.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
