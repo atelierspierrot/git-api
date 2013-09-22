@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>GitApi\Repository | </title>
+                    <link rel="stylesheet" type="text/css" href="../stylesheet.css">
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../classes.html">Classes</a></li>
+                            <li><a href="../namespaces.html">Namespaces</a></li>
+                        <li><a href="../interfaces.html">Interfaces</a></li>
+            <li><a href="../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title"></div>
+
+            <div class="type">Class</div>
+    <h1><a href="../GitApi.html">GitApi</a>\Repository</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>Repository</strong></p>
+
+            <div class="description">
+            <p>Largely inspired from <a href="http://github.com/kbjr/Git.php">http://github.com/kbjr/Git.php</a></p>
+            <p>
+</p>
+        </div>
+    
+    
+            <h2>Properties</h2>
+
+            <table>
+                    <tr>
+                <td class="type" id="property_full_pretty_format">
+                    static                                        
+                </td>
+                <td>$full_pretty_format</td>
+                <td class="last">
+</td>
+            </tr>
+            </table>
+
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>($repository_path = null, $createNew = false, $_init = true)
+                    <p>Constructor</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setGitConsole">setGitConsole</a>(<a href="../GitApi/GitCommand.html"><abbr title="GitApi\GitCommand">GitCommand</abbr></a> $console)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getGitConsole">getGitConsole</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;
+                </td>
+                <td class="last">
+                    <a href="#method_createNew">createNew</a>(string $repository_path, string $source = null)
+                    <p>Create a new git repository</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getRepositoryPath">getRepositoryPath</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    void
+                </td>
+                <td class="last">
+                    <a href="#method_setRepositoryPath">setRepositoryPath</a>($repository_path, $createNew = false, $_init = true)
+                    <p>Set the repository's path</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    bool
+                </td>
+                <td class="last">
+                    <a href="#method_testGit">testGit</a>()
+                    <p>Tests if git is installed</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_run">run</a>(string $command)
+                    <p>Run a git command in the git repository</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getCommitsList">getCommitsList</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getCommitsHistory">getCommitsHistory</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getLastCommitInfos">getLastCommitInfos</a>($path = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getCommitInfos">getCommitInfos</a>($hash, $path = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getCommitChanges">getCommitChanges</a>($hash)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getCommitersList">getCommitersList</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getRecursiveTree">getRecursiveTree</a>($scope = &#039;HEAD&#039;, $subdir = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getTree">getTree</a>($scope = &#039;HEAD&#039;, $subdir = null, $only_directories = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getFilesInfo">getFilesInfo</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getRaw">getRaw</a>($object)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_isImageContent">isImageContent</a>($content)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getRawImageData">getRawImageData</a>($content)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_add">add</a>(mixed $files = &#039;*&#039;)
+                    <p>Runs a <code>git add</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_commit">commit</a>(string $message = &#039;&#039;)
+                    <p>Runs a <code>git commit</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_cloneTo">cloneTo</a>(string $target)
+                    <p>Runs a <code>git clone</code> call to clone the current repository into a different directory</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_cloneFrom">cloneFrom</a>(string $source)
+                    <p>Runs a <code>git clone</code> call to clone a different repository into the current repository</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_cloneRemote">cloneRemote</a>(string $source)
+                    <p>Runs a <code>git clone</code> call to clone a remote repository into the current repository</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_clean">clean</a>(bool $dirs = false)
+                    <p>Runs a <code>git clean</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_createBranch">createBranch</a>(string $branch)
+                    <p>Runs a <code>git branch</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_deleteBranch">deleteBranch</a>($branch, $force = false)
+                    <p>Runs a <code>git branch -[d|D]</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getBranchesList">getBranchesList</a>(bool $keep_asterisk = false)
+                    <p>Runs a <code>git branch</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getCurrentBranch">getCurrentBranch</a>(bool $keep_asterisk = false)
+                    <p>Returns name of active branch</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_checkout">checkout</a>(string $branch)
+                    <p>Runs a <code>git checkout</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_merge">merge</a>(string $branch)
+                    <p>Runs a <code>git merge</code> call</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_fetch">fetch</a>()
+                    <p>Runs a git fetch on the current branch</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getTagsList">getTagsList</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_buildTagTarball">buildTagTarball</a>($tagname, $target_dir, $target_file = &#039;auto&#039;, $format = &#039;tar&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_buildTarball">buildTarball</a>($target_dir, $target_file = &#039;latest&#039;, $format = &#039;tar&#039;, $scope = &#039;HEAD&#039;)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_addTag">addTag</a>(string $tag, string $message = null)
+                    <p>Add a new tag on the current position</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_push">push</a>(string $remote, string $branch)
+                    <p>Push specific branch to a remote</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_pull">pull</a>(string $remote, string $branch)
+                    <p>Pull specific branch from remote</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setDescription">setDescription</a>(string $new)
+                    <p>Sets the project description.</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getDescription">getDescription</a>()
+                    <p>Gets the project description.</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 29</div>
+        <code>            public            
+    <strong>__construct</strong>($repository_path = null, $createNew = false, $_init = true)</code>
+    </h3>
+    <div class="details">
+        <p>Constructor</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$repository_path</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$createNew</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$_init</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setGitConsole">
+        <div class="location">at line 37</div>
+        <code>            public            
+    <strong>setGitConsole</strong>(<a href="../GitApi/GitCommand.html"><abbr title="GitApi\GitCommand">GitCommand</abbr></a> $console)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../GitApi/GitCommand.html"><abbr title="GitApi\GitCommand">GitCommand</abbr></a></td>
+                <td>$console</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getGitConsole">
+        <div class="location">at line 43</div>
+        <code>            public            
+    <strong>getGitConsole</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_createNew">
+        <div class="location">at line 55</div>
+        <code>        static    public            
+    <strong>createNew</strong>(string $repository_path, string $source = null)</code>
+    </h3>
+    <div class="details">
+        <p>Create a new git repository</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$repository_path</td>
+                <td>repository path</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$source</td>
+                <td>directory to source</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Excpetion">Excpetion</abbr></td>
+                <td>Throws an <code>Exception</code> if the path is already a GIT repository</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRepositoryPath">
+        <div class="location">at line 72</div>
+        <code>            public            
+    <strong>getRepositoryPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setRepositoryPath">
+        <div class="location">at line 87</div>
+        <code>            public            void
+    <strong>setRepositoryPath</strong>($repository_path, $createNew = false, $_init = true)</code>
+    </h3>
+    <div class="details">
+        <p>Set the repository's path</p>
+        <p>Accepts the repository path</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$repository_path</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$createNew</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$_init</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>void</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_testGit">
+        <div class="location">at line 136</div>
+        <code>            public            bool
+    <strong>testGit</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Tests if git is installed</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>bool</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_run">
+        <div class="location">at line 164</div>
+        <code>            public            string
+    <strong>run</strong>(string $command)</code>
+    </h3>
+    <div class="details">
+        <p>Run a git command in the git repository</p>
+        <p>Accepts a git command to run</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$command</td>
+                <td>command to run</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCommitsList">
+        <div class="location">at line 169</div>
+        <code>            public            
+    <strong>getCommitsList</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCommitsHistory">
+        <div class="location">at line 239</div>
+        <code>            public            
+    <strong>getCommitsHistory</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLastCommitInfos">
+        <div class="location">at line 260</div>
+        <code>            public            
+    <strong>getLastCommitInfos</strong>($path = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$path</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCommitInfos">
+        <div class="location">at line 269</div>
+        <code>            public            
+    <strong>getCommitInfos</strong>($hash, $path = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$hash</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$path</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCommitChanges">
+        <div class="location">at line 391</div>
+        <code>            public            
+    <strong>getCommitChanges</strong>($hash)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$hash</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCommitersList">
+        <div class="location">at line 401</div>
+        <code>            public            
+    <strong>getCommitersList</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRecursiveTree">
+        <div class="location">at line 440</div>
+        <code>            public            
+    <strong>getRecursiveTree</strong>($scope = &#039;HEAD&#039;, $subdir = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$subdir</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTree">
+        <div class="location">at line 457</div>
+        <code>            public            
+    <strong>getTree</strong>($scope = &#039;HEAD&#039;, $subdir = null, $only_directories = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$subdir</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$only_directories</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFilesInfo">
+        <div class="location">at line 474</div>
+        <code>            public            
+    <strong>getFilesInfo</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRaw">
+        <div class="location">at line 491</div>
+        <code>            public            
+    <strong>getRaw</strong>($object)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$object</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isImageContent">
+        <div class="location">at line 496</div>
+        <code>            public            
+    <strong>isImageContent</strong>($content)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$content</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRawImageData">
+        <div class="location">at line 503</div>
+        <code>            public            
+    <strong>getRawImageData</strong>($content)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$content</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_add">
+        <div class="location">at line 522</div>
+        <code>            public            string
+    <strong>add</strong>(mixed $files = &#039;*&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git add</code> call</p>
+        <p>Accepts a list of files to add</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$files</td>
+                <td>files to add</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_commit">
+        <div class="location">at line 539</div>
+        <code>            public            string
+    <strong>commit</strong>(string $message = &#039;&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git commit</code> call</p>
+        <p>Accepts a commit message string</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$message</td>
+                <td>commit message</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_cloneTo">
+        <div class="location">at line 554</div>
+        <code>            public            string
+    <strong>cloneTo</strong>(string $target)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git clone</code> call to clone the current repository into a different directory</p>
+        <p>Accepts a target directory</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$target</td>
+                <td>target directory</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_cloneFrom">
+        <div class="location">at line 569</div>
+        <code>            public            string
+    <strong>cloneFrom</strong>(string $source)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git clone</code> call to clone a different repository into the current repository</p>
+        <p>Accepts a source directory</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$source</td>
+                <td>source directory</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_cloneRemote">
+        <div class="location">at line 584</div>
+        <code>            public            string
+    <strong>cloneRemote</strong>(string $source)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git clone</code> call to clone a remote repository into the current repository</p>
+        <p>Accepts a source url</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$source</td>
+                <td>source url</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_clean">
+        <div class="location">at line 598</div>
+        <code>            public            string
+    <strong>clean</strong>(bool $dirs = false)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git clean</code> call</p>
+        <p>Accepts a remove directories flag</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>bool</td>
+                <td>$dirs</td>
+                <td>delete directories?</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_createBranch">
+        <div class="location">at line 612</div>
+        <code>            public            string
+    <strong>createBranch</strong>(string $branch)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git branch</code> call</p>
+        <p>Accepts a name for the branch</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$branch</td>
+                <td>branch name</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_deleteBranch">
+        <div class="location">at line 626</div>
+        <code>            public            string
+    <strong>deleteBranch</strong>($branch, $force = false)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git branch -[d|D]</code> call</p>
+        <p>Accepts a name for the branch</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$branch</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$force</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getBranchesList">
+        <div class="location">at line 638</div>
+        <code>            public            array
+    <strong>getBranchesList</strong>(bool $keep_asterisk = false)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git branch</code> call</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>bool</td>
+                <td>$keep_asterisk</td>
+                <td>keep asterisk mark on active branch</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCurrentBranch">
+        <div class="location">at line 660</div>
+        <code>            public            string
+    <strong>getCurrentBranch</strong>(bool $keep_asterisk = false)</code>
+    </h3>
+    <div class="details">
+        <p>Returns name of active branch</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>bool</td>
+                <td>$keep_asterisk</td>
+                <td>keep asterisk mark on branch name</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_checkout">
+        <div class="location">at line 681</div>
+        <code>            public            string
+    <strong>checkout</strong>(string $branch)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git checkout</code> call</p>
+        <p>Accepts a name for the branch</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$branch</td>
+                <td>branch name</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_merge">
+        <div class="location">at line 696</div>
+        <code>            public            string
+    <strong>merge</strong>(string $branch)</code>
+    </h3>
+    <div class="details">
+        <p>Runs a <code>git merge</code> call</p>
+        <p>Accepts a name for the branch to be merged</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$branch</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_fetch">
+        <div class="location">at line 708</div>
+        <code>            public            string
+    <strong>fetch</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Runs a git fetch on the current branch</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTagsList">
+        <div class="location">at line 713</div>
+        <code>            public            
+    <strong>getTagsList</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_buildTagTarball">
+        <div class="location">at line 735</div>
+        <code>            public            
+    <strong>buildTagTarball</strong>($tagname, $target_dir, $target_file = &#039;auto&#039;, $format = &#039;tar&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$tagname</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$target_dir</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$target_file</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$format</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_buildTarball">
+        <div class="location">at line 754</div>
+        <code>            public            
+    <strong>buildTarball</strong>($target_dir, $target_file = &#039;latest&#039;, $format = &#039;tar&#039;, $scope = &#039;HEAD&#039;)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$target_dir</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$target_file</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$format</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$scope</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addTag">
+        <div class="location">at line 782</div>
+        <code>            public            string
+    <strong>addTag</strong>(string $tag, string $message = null)</code>
+    </h3>
+    <div class="details">
+        <p>Add a new tag on the current position</p>
+        <p>Accepts the name for the tag and the message</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$tag</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$message</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_push">
+        <div class="location">at line 800</div>
+        <code>            public            string
+    <strong>push</strong>(string $remote, string $branch)</code>
+    </h3>
+    <div class="details">
+        <p>Push specific branch to a remote</p>
+        <p>Accepts the name of the remote and local branch</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$remote</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$branch</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_pull">
+        <div class="location">at line 814</div>
+        <code>            public            string
+    <strong>pull</strong>(string $remote, string $branch)</code>
+    </h3>
+    <div class="details">
+        <p>Pull specific branch from remote</p>
+        <p>Accepts the name of the remote and local branch</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$remote</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$branch</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setDescription">
+        <div class="location">at line 824</div>
+        <code>            public            
+    <strong>setDescription</strong>(string $new)</code>
+    </h3>
+    <div class="details">
+        <p>Sets the project description.</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$new</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDescription">
+        <div class="location">at line 834</div>
+        <code>            public            string
+    <strong>getDescription</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Gets the project description.</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+    </body>
+</html>
