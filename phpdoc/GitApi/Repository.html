@@ -12,6 +12,7 @@
             <li><a href="../classes.html">Classes</a></li>
                             <li><a href="../namespaces.html">Namespaces</a></li>
                         <li><a href="../interfaces.html">Interfaces</a></li>
+            <li><a href="../traits.html">Traits</a></li>
             <li><a href="../doc-index.html">Index</a></li>
             
         </ul>
@@ -22,7 +23,8 @@
     <h1><a href="../GitApi.html">GitApi</a>\Repository</h1>
     </div>
         <div class="content">
-                <p>class    <strong>Repository</strong></p>
+                <p>    class
+    <strong>Repository</strong></p>
 
             <div class="description">
             <p>Largely inspired from <a href="http://github.com/kbjr/Git.php">http://github.com/kbjr/Git.php</a></p>
@@ -36,7 +38,7 @@
             <table>
                     <tr>
                 <td class="type" id="property_full_pretty_format">
-                    static                                        
+                    static                                        string
                 </td>
                 <td>$full_pretty_format</td>
                 <td class="last">
@@ -60,23 +62,31 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../GitApi/Repository.html"><abbr title="GitApi\Repository">Repository</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_setGitConsole">setGitConsole</a>(<a href="../GitApi/GitCommand.html"><abbr title="GitApi\GitCommand">GitCommand</abbr></a> $console)
-                    <p>
-</p>
+                    <p>Define the console object</p>
                 </td>
                 <td></td>
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    object
                 </td>
                 <td class="last">
                     <a href="#method_getGitConsole">getGitConsole</a>()
-                    <p>
-</p>
+                    <p>Get the console object</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getRepositoryPath">getRepositoryPath</a>()
+                    <p>Get the repository local path</p>
                 </td>
                 <td></td>
             </tr>
@@ -87,17 +97,6 @@
                 <td class="last">
                     <a href="#method_createNew">createNew</a>(string $repository_path, string $source = null)
                     <p>Create a new git repository</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_getRepositoryPath">getRepositoryPath</a>()
-                    <p>
-</p>
                 </td>
                 <td></td>
             </tr>
@@ -128,6 +127,17 @@
                 <td class="last">
                     <a href="#method_run">run</a>(string $command)
                     <p>Run a git command in the git repository</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_getRemoteOriginUrl">getRemoteOriginUrl</a>()
+                    <p>
+</p>
                 </td>
                 <td></td>
             </tr>
@@ -482,7 +492,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 29</div>
+        <div class="location">at line 39</div>
         <code>            public            
     <strong>__construct</strong>($repository_path = null, $createNew = false, $_init = true)</code>
     </h3>
@@ -521,13 +531,12 @@
     </div>
 
                 <h3 id="method_setGitConsole">
-        <div class="location">at line 37</div>
-        <code>            public            
+        <div class="location">at line 57</div>
+        <code>            public            <a href="../GitApi/Repository.html"><abbr title="GitApi\Repository">Repository</abbr></a>
     <strong>setGitConsole</strong>(<a href="../GitApi/GitCommand.html"><abbr title="GitApi\GitCommand">GitCommand</abbr></a> $console)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Define the console object</p>
         <p>
 </p>
         <div class="tags">
@@ -537,36 +546,79 @@
                     <tr>
                 <td><a href="../GitApi/GitCommand.html"><abbr title="GitApi\GitCommand">GitCommand</abbr></a></td>
                 <td>$console</td>
-                <td>
-</td>
+                <td>\GitApi\GitCommand</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../GitApi/Repository.html"><abbr title="GitApi\Repository">Repository</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_getGitConsole">
-        <div class="location">at line 43</div>
-        <code>            public            
+        <div class="location">at line 68</div>
+        <code>            public            object
     <strong>getGitConsole</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
+        <p>Get the console object</p>
         <p>
 </p>
         <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>object</td>
+            <td>\GitApi\GitCommand</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRepositoryPath">
+        <div class="location">at line 78</div>
+        <code>            public            string
+    <strong>getRepositoryPath</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>Get the repository local path</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
     </div>
 
                 <h3 id="method_createNew">
-        <div class="location">at line 55</div>
+        <div class="location">at line 95</div>
         <code>        static    public            
     <strong>createNew</strong>(string $repository_path, string $source = null)</code>
     </h3>
@@ -581,12 +633,12 @@
                     <tr>
                 <td>string</td>
                 <td>$repository_path</td>
-                <td>repository path</td>
+                <td>The repository path</td>
             </tr>
                     <tr>
                 <td>string</td>
                 <td>$source</td>
-                <td>directory to source</td>
+                <td>The directory to source</td>
             </tr>
             </table>
 
@@ -597,7 +649,11 @@
                     <table>
                     <tr>
                 <td><abbr title="Excpetion">Excpetion</abbr></td>
-                <td>Throws an <code>Exception</code> if the path is already a GIT repository</td>
+                <td>if the path already exists</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Excpetion">Excpetion</abbr></td>
+                <td>if the path is already a GIT repository</td>
             </tr>
             </table>
 
@@ -605,31 +661,15 @@
                     </div>
     </div>
 
-                <h3 id="method_getRepositoryPath">
-        <div class="location">at line 72</div>
-        <code>            public            
-    <strong>getRepositoryPath</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-            
-            
-                    </div>
-    </div>
-
                 <h3 id="method_setRepositoryPath">
-        <div class="location">at line 87</div>
+        <div class="location">at line 128</div>
         <code>            public            void
     <strong>setRepositoryPath</strong>($repository_path, $createNew = false, $_init = true)</code>
     </h3>
     <div class="details">
         <p>Set the repository's path</p>
-        <p>Accepts the repository path</p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -671,7 +711,7 @@
     </div>
 
                 <h3 id="method_testGit">
-        <div class="location">at line 136</div>
+        <div class="location">at line 177</div>
         <code>            public            bool
     <strong>testGit</strong>()</code>
     </h3>
@@ -697,13 +737,14 @@
     </div>
 
                 <h3 id="method_run">
-        <div class="location">at line 164</div>
+        <div class="location">at line 202</div>
         <code>            public            string
     <strong>run</strong>(string $command)</code>
     </h3>
     <div class="details">
         <p>Run a git command in the git repository</p>
-        <p>Accepts a git command to run</p>
+        <p>
+</p>
         <div class="tags">
                             <h4>Parameters</h4>
 
@@ -711,7 +752,8 @@
                     <tr>
                 <td>string</td>
                 <td>$command</td>
-                <td>command to run</td>
+                <td>
+</td>
             </tr>
             </table>
 
@@ -731,8 +773,25 @@
                     </div>
     </div>
 
+                <h3 id="method_getRemoteOriginUrl">
+        <div class="location">at line 207</div>
+        <code>            public            
+    <strong>getRemoteOriginUrl</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
                 <h3 id="method_getCommitsList">
-        <div class="location">at line 169</div>
+        <div class="location">at line 212</div>
         <code>            public            
     <strong>getCommitsList</strong>()</code>
     </h3>
@@ -749,7 +808,7 @@
     </div>
 
                 <h3 id="method_getCommitsHistory">
-        <div class="location">at line 239</div>
+        <div class="location">at line 282</div>
         <code>            public            
     <strong>getCommitsHistory</strong>()</code>
     </h3>
@@ -766,7 +825,7 @@
     </div>
 
                 <h3 id="method_getLastCommitInfos">
-        <div class="location">at line 260</div>
+        <div class="location">at line 303</div>
         <code>            public            
     <strong>getLastCommitInfos</strong>($path = null)</code>
     </h3>
@@ -794,7 +853,7 @@
     </div>
 
                 <h3 id="method_getCommitInfos">
-        <div class="location">at line 269</div>
+        <div class="location">at line 312</div>
         <code>            public            
     <strong>getCommitInfos</strong>($hash, $path = null)</code>
     </h3>
@@ -828,7 +887,7 @@
     </div>
 
                 <h3 id="method_getCommitChanges">
-        <div class="location">at line 391</div>
+        <div class="location">at line 434</div>
         <code>            public            
     <strong>getCommitChanges</strong>($hash)</code>
     </h3>
@@ -856,7 +915,7 @@
     </div>
 
                 <h3 id="method_getCommitersList">
-        <div class="location">at line 401</div>
+        <div class="location">at line 444</div>
         <code>            public            
     <strong>getCommitersList</strong>()</code>
     </h3>
@@ -873,7 +932,7 @@
     </div>
 
                 <h3 id="method_getRecursiveTree">
-        <div class="location">at line 440</div>
+        <div class="location">at line 483</div>
         <code>            public            
     <strong>getRecursiveTree</strong>($scope = &#039;HEAD&#039;, $subdir = null)</code>
     </h3>
@@ -907,7 +966,7 @@
     </div>
 
                 <h3 id="method_getTree">
-        <div class="location">at line 457</div>
+        <div class="location">at line 500</div>
         <code>            public            
     <strong>getTree</strong>($scope = &#039;HEAD&#039;, $subdir = null, $only_directories = null)</code>
     </h3>
@@ -947,7 +1006,7 @@
     </div>
 
                 <h3 id="method_getFilesInfo">
-        <div class="location">at line 474</div>
+        <div class="location">at line 517</div>
         <code>            public            
     <strong>getFilesInfo</strong>()</code>
     </h3>
@@ -964,7 +1023,7 @@
     </div>
 
                 <h3 id="method_getRaw">
-        <div class="location">at line 491</div>
+        <div class="location">at line 534</div>
         <code>            public            
     <strong>getRaw</strong>($object)</code>
     </h3>
@@ -992,7 +1051,7 @@
     </div>
 
                 <h3 id="method_isImageContent">
-        <div class="location">at line 496</div>
+        <div class="location">at line 539</div>
         <code>            public            
     <strong>isImageContent</strong>($content)</code>
     </h3>
@@ -1020,7 +1079,7 @@
     </div>
 
                 <h3 id="method_getRawImageData">
-        <div class="location">at line 503</div>
+        <div class="location">at line 546</div>
         <code>            public            
     <strong>getRawImageData</strong>($content)</code>
     </h3>
@@ -1048,7 +1107,7 @@
     </div>
 
                 <h3 id="method_add">
-        <div class="location">at line 522</div>
+        <div class="location">at line 565</div>
         <code>            public            string
     <strong>add</strong>(mixed $files = &#039;*&#039;)</code>
     </h3>
@@ -1083,7 +1142,7 @@
     </div>
 
                 <h3 id="method_commit">
-        <div class="location">at line 539</div>
+        <div class="location">at line 582</div>
         <code>            public            string
     <strong>commit</strong>(string $message = &#039;&#039;)</code>
     </h3>
@@ -1118,7 +1177,7 @@
     </div>
 
                 <h3 id="method_cloneTo">
-        <div class="location">at line 554</div>
+        <div class="location">at line 597</div>
         <code>            public            string
     <strong>cloneTo</strong>(string $target)</code>
     </h3>
@@ -1153,7 +1212,7 @@
     </div>
 
                 <h3 id="method_cloneFrom">
-        <div class="location">at line 569</div>
+        <div class="location">at line 612</div>
         <code>            public            string
     <strong>cloneFrom</strong>(string $source)</code>
     </h3>
@@ -1188,7 +1247,7 @@
     </div>
 
                 <h3 id="method_cloneRemote">
-        <div class="location">at line 584</div>
+        <div class="location">at line 627</div>
         <code>            public            string
     <strong>cloneRemote</strong>(string $source)</code>
     </h3>
@@ -1223,7 +1282,7 @@
     </div>
 
                 <h3 id="method_clean">
-        <div class="location">at line 598</div>
+        <div class="location">at line 641</div>
         <code>            public            string
     <strong>clean</strong>(bool $dirs = false)</code>
     </h3>
@@ -1258,7 +1317,7 @@
     </div>
 
                 <h3 id="method_createBranch">
-        <div class="location">at line 612</div>
+        <div class="location">at line 655</div>
         <code>            public            string
     <strong>createBranch</strong>(string $branch)</code>
     </h3>
@@ -1293,7 +1352,7 @@
     </div>
 
                 <h3 id="method_deleteBranch">
-        <div class="location">at line 626</div>
+        <div class="location">at line 669</div>
         <code>            public            string
     <strong>deleteBranch</strong>($branch, $force = false)</code>
     </h3>
@@ -1335,7 +1394,7 @@
     </div>
 
                 <h3 id="method_getBranchesList">
-        <div class="location">at line 638</div>
+        <div class="location">at line 681</div>
         <code>            public            array
     <strong>getBranchesList</strong>(bool $keep_asterisk = false)</code>
     </h3>
@@ -1371,7 +1430,7 @@
     </div>
 
                 <h3 id="method_getCurrentBranch">
-        <div class="location">at line 660</div>
+        <div class="location">at line 703</div>
         <code>            public            string
     <strong>getCurrentBranch</strong>(bool $keep_asterisk = false)</code>
     </h3>
@@ -1407,7 +1466,7 @@
     </div>
 
                 <h3 id="method_checkout">
-        <div class="location">at line 681</div>
+        <div class="location">at line 724</div>
         <code>            public            string
     <strong>checkout</strong>(string $branch)</code>
     </h3>
@@ -1442,7 +1501,7 @@
     </div>
 
                 <h3 id="method_merge">
-        <div class="location">at line 696</div>
+        <div class="location">at line 739</div>
         <code>            public            string
     <strong>merge</strong>(string $branch)</code>
     </h3>
@@ -1478,7 +1537,7 @@
     </div>
 
                 <h3 id="method_fetch">
-        <div class="location">at line 708</div>
+        <div class="location">at line 751</div>
         <code>            public            string
     <strong>fetch</strong>()</code>
     </h3>
@@ -1504,7 +1563,7 @@
     </div>
 
                 <h3 id="method_getTagsList">
-        <div class="location">at line 713</div>
+        <div class="location">at line 756</div>
         <code>            public            
     <strong>getTagsList</strong>()</code>
     </h3>
@@ -1521,7 +1580,7 @@
     </div>
 
                 <h3 id="method_buildTagTarball">
-        <div class="location">at line 735</div>
+        <div class="location">at line 778</div>
         <code>            public            
     <strong>buildTagTarball</strong>($tagname, $target_dir, $target_file = &#039;auto&#039;, $format = &#039;tar&#039;)</code>
     </h3>
@@ -1567,7 +1626,7 @@
     </div>
 
                 <h3 id="method_buildTarball">
-        <div class="location">at line 754</div>
+        <div class="location">at line 797</div>
         <code>            public            
     <strong>buildTarball</strong>($target_dir, $target_file = &#039;latest&#039;, $format = &#039;tar&#039;, $scope = &#039;HEAD&#039;)</code>
     </h3>
@@ -1613,7 +1672,7 @@
     </div>
 
                 <h3 id="method_addTag">
-        <div class="location">at line 782</div>
+        <div class="location">at line 825</div>
         <code>            public            string
     <strong>addTag</strong>(string $tag, string $message = null)</code>
     </h3>
@@ -1655,7 +1714,7 @@
     </div>
 
                 <h3 id="method_push">
-        <div class="location">at line 800</div>
+        <div class="location">at line 843</div>
         <code>            public            string
     <strong>push</strong>(string $remote, string $branch)</code>
     </h3>
@@ -1697,7 +1756,7 @@
     </div>
 
                 <h3 id="method_pull">
-        <div class="location">at line 814</div>
+        <div class="location">at line 857</div>
         <code>            public            string
     <strong>pull</strong>(string $remote, string $branch)</code>
     </h3>
@@ -1739,7 +1798,7 @@
     </div>
 
                 <h3 id="method_setDescription">
-        <div class="location">at line 824</div>
+        <div class="location">at line 867</div>
         <code>            public            
     <strong>setDescription</strong>(string $new)</code>
     </h3>
@@ -1766,7 +1825,7 @@
     </div>
 
                 <h3 id="method_getDescription">
-        <div class="location">at line 834</div>
+        <div class="location">at line 877</div>
         <code>            public            string
     <strong>getDescription</strong>()</code>
     </h3>
