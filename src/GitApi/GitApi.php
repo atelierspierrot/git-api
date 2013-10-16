@@ -47,9 +47,18 @@ class GitApi
 	 * @param string $source The sources directory
 	 * @return object A `GitApi\Repository` instance
 	 */
-	public static function &create($repo_path, $source = null)
+	public static function create($repo_path, $source = null)
 	{
-		return Repository::create_new($repo_path, $source);
+        try {
+    		$repo = new Repository($repo_path);
+    		$remote = $repo->getRemoteOriginUrl();
+    		if ($remote===$source || $remote.'.git'===$source || $remote===$source.'.git') {
+                $branch = $repo->getCurrentBranch();
+    		    $repo->pull($remote, $branch);
+    		    return $repo;
+    		}
+    	} catch (\Exception $e) {}
+		return Repository::createNew($repo_path, $source);
 	}
 
 	/**

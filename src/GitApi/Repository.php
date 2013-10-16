@@ -15,16 +15,26 @@ namespace GitApi;
 class Repository
 {
 
+    /**
+     * @var string
+     */
 	protected $repository_path = null;
+
+    /**
+     * @var object \GitApi\GitCommand
+     */
 	protected $git_console = null;
 
+    /**
+     * @var string
+     */
     public static $full_pretty_format = 'commit:%H%ncommit-abbrev:%h%ntree:%T%ntree-abbrev:%t%nparents:%P%nparents-abbrev:%p%nauthor_name:%an%nauthor_email:%ae%nauthor_date:%ad%ncommiter_name:%cn%ncommiter_email:%ce%ncommiter_date:%cd%ndate:%ai%nnotes:%N%ntitle:%s%nmessage:%b%n';
 
 	/**
 	 * Constructor
 	 *
-	 * @param   string  repository path
-	 * @param   bool    create if not exists?
+	 * @param string The repository path
+	 * @param bool Create if not exists?
 	 */
 	public function __construct($repository_path = null, $createNew = false, $_init = true)
 	{
@@ -34,31 +44,70 @@ class Repository
 		}
 	}
 
+// -----------------------------
+// Setters / Getters
+// -----------------------------
+
+    /**
+     * Define the console object
+     *
+     * @param object \GitApi\GitCommand
+     * @return self
+     */
     public function setGitConsole(GitCommand $console)
     {
         $this->git_console = $console;
         return $this;
     }
 
+    /**
+     * Get the console object
+     *
+     * @return object \GitApi\GitCommand
+     */
     public function getGitConsole()
     {
         return $this->git_console;
     }
 
+    /**
+     * Get the repository local path
+     *
+     * @return string
+     */
+	public function getRepositoryPath()
+	{
+	    return $this->repository_path;
+	}
+	
+// -----------------------------
+// Process
+// -----------------------------
+
 	/**
 	 * Create a new git repository
 	 *
-	 * @param   string  repository path
-	 * @param   string  directory to source
-	 * @throws Excpetion Throws an `Exception` if the path is already a GIT repository
+	 * @param string The repository path
+	 * @param string The directory to source
+	 * @throws Excpetion if the path already exists
+	 * @throws Excpetion if the path is already a GIT repository
 	 */
-	public static function &createNew($repository_path, $source = null) 
+	public static function createNew($repository_path, $source = null) 
 	{
-		if (is_dir($repository_path) && file_exists($repository_path."/.git") && is_dir($repository_path."/.git")) {
+		if (file_exists($repository_path) && is_dir($repository_path)) {
 			throw new \Exception(
-			    sprintf('"%s" is already a git repository', $repository_path)
+			    sprintf('"%s" already exists!', $repository_path)
+			);
+		} elseif (file_exists($repository_path) && is_dir($repository_path) && file_exists($repository_path."/.git") && is_dir($repository_path."/.git")) {
+			throw new \Exception(
+			    sprintf('"%s" is already a git repository!', $repository_path)
 			);
 		} else {
+		    if (!mkdir($repository_path)) {
+                throw new \Exception(
+                    sprintf('Can not create directory "%s"!', $repository_path)
+                );
+		    }
 			$repo = new self($repository_path, true, false);
 			if (is_string($source)) {
 				$repo->cloneFrom($source);
@@ -69,20 +118,12 @@ class Repository
 		}
 	}
 
-	public function getRepositoryPath()
-	{
-	    return $this->repository_path;
-	}
-	
 	/**
 	 * Set the repository's path
 	 *
-	 * Accepts the repository path
-	 *
-	 * @access  public
-	 * @param   string  repository path
-	 * @param   bool    create if not exists?
-	 * @return  void
+	 * @param string $path
+	 * @param bool $create_new
+	 * @return void
 	 */
 	public function setRepositoryPath($repository_path, $createNew = false, $_init = true)
 	{
@@ -155,16 +196,18 @@ class Repository
 	/**
 	 * Run a git command in the git repository
 	 *
-	 * Accepts a git command to run
-	 *
-	 * @access  public
-	 * @param   string  command to run
-	 * @return  string
+	 * @param string $command
+	 * @return string
 	 */
 	public function run($command)
 	{
-		return $this->git_console->run(GitApi::getBin()." ".$command, $this->getRepositoryPath());
+		return $this->getGitConsole()->run(GitApi::getBin()." ".$command, $this->getRepositoryPath());
 	}
+
+    public function getRemoteOriginUrl()
+    {
+		return $this->run("config --get remote.origin.url");
+    }
 
     public function getCommitsList()
     {

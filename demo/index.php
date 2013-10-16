@@ -107,7 +107,28 @@ $repo = !empty($_GET) && isset($_GET['repo']) ? $_GET['repo'] :
 <pre>
 <?php
 if (!empty($repo)) {
-    $a = \GitApi\GitApi::open($repo);
+
+    if (\Library\Helper\Url::isUrl($repo)) {
+        $tmp_dir = __DIR__.'/tmp';
+        if (!file_exists($tmp_dir)) {
+            if (!mkdir($tmp_dir)) {
+                die(
+                    sprintf('Can not create temporary directory "%s"!', $tmp_dir)
+                );
+            }
+        }
+        if (!is_writable($tmp_dir)) {
+            die(
+                sprintf('Temporary directory "%s" MUST be writable!', $tmp_dir)
+            );
+        }
+        $a = \GitApi\GitApi::create(
+            $tmp_dir.'/'.basename($repo), $repo
+        );
+    } else {
+        $a = \GitApi\GitApi::open($repo);
+    }
+
     echo '<br />new GitApi object : '.$a->getRepositoryPath();
     echo '<br />';
     var_export($a);
