@@ -27,7 +27,7 @@ class GitCommand extends Command
 	 */
     public function run($command, $repository = null, $force = false)
 	{
-        list( $stdout, $status, $stderr ) = parent::run($command, $repository);
+        list($stdout, $status, $stderr) = parent::run($command, $repository);
         if (!empty($stderr)) {
             throw new GitRuntimeException($stderr);
         }
