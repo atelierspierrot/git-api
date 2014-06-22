@@ -18,31 +18,32 @@ class Repository
     /**
      * @var string
      */
-	protected $repository_path = null;
+    protected $repository_path = null;
 
     /**
      * @var object \GitApi\GitCommand
      */
-	protected $git_console = null;
+    protected $git_console = null;
 
     /**
      * @var string
      */
     public static $full_pretty_format = 'commit:%H%ncommit-abbrev:%h%ntree:%T%ntree-abbrev:%t%nparents:%P%nparents-abbrev:%p%nauthor_name:%an%nauthor_email:%ae%nauthor_date:%ad%ncommiter_name:%cn%ncommiter_email:%ce%ncommiter_date:%cd%ndate:%ai%nnotes:%N%ntitle:%s%nmessage:%b%n';
 
-	/**
-	 * Constructor
-	 *
-	 * @param string The repository path
-	 * @param bool Create if not exists?
-	 */
-	public function __construct($repository_path = null, $createNew = false, $_init = true)
-	{
-	    $this->setGitConsole( new GitCommand );
-		if (is_string($repository_path)) {
-			$this->setRepositoryPath($repository_path, $createNew, $_init);
-		}
-	}
+    /**
+     * Constructor
+     *
+     * @param   string  $repository_path The repository path
+     * @param   bool    $createNew Create if not exists?
+     * @param   bool    $_init
+     */
+    public function __construct($repository_path = null, $createNew = false, $_init = true)
+    {
+        $this->setGitConsole( new GitCommand );
+        if (is_string($repository_path)) {
+            $this->setRepositoryPath($repository_path, $createNew, $_init);
+        }
+    }
 
 // -----------------------------
 // Setters / Getters
@@ -51,7 +52,7 @@ class Repository
     /**
      * Define the console object
      *
-     * @param object \GitApi\GitCommand
+     * @param \GitApi\GitCommand $console
      * @return self
      */
     public function setGitConsole(GitCommand $console)
@@ -63,7 +64,7 @@ class Repository
     /**
      * Get the console object
      *
-     * @return object \GitApi\GitCommand
+     * @return \GitApi\GitCommand
      */
     public function getGitConsole()
     {
@@ -75,151 +76,155 @@ class Repository
      *
      * @return string
      */
-	public function getRepositoryPath()
-	{
-	    return $this->repository_path;
-	}
-	
+    public function getRepositoryPath()
+    {
+        return $this->repository_path;
+    }
+
 // -----------------------------
 // Process
 // -----------------------------
 
-	/**
-	 * Create a new git repository
-	 *
-	 * @param string The repository path
-	 * @param string The directory to source
-	 * @throws Excpetion if the path already exists
-	 * @throws Excpetion if the path is already a GIT repository
-	 */
-	public static function createNew($repository_path, $source = null) 
-	{
-		if (file_exists($repository_path) && is_dir($repository_path)) {
-			throw new \Exception(
-			    sprintf('"%s" already exists!', $repository_path)
-			);
-		} elseif (file_exists($repository_path) && is_dir($repository_path) && file_exists($repository_path."/.git") && is_dir($repository_path."/.git")) {
-			throw new \Exception(
-			    sprintf('"%s" is already a git repository!', $repository_path)
-			);
-		} else {
-		    if (!mkdir($repository_path)) {
+    /**
+     * Create a new git repository
+     *
+     * @param   string  $repository_path The repository path
+     * @param   string  $source The directory to source
+     * @return  mixed
+     * @throws  \Exception if the path already exists
+     * @throws  \Exception if the path is already a GIT repository
+     * @throws  \Exception if the directory can't be created
+     */
+    public static function createNew($repository_path, $source = null)
+    {
+        if (file_exists($repository_path) && is_dir($repository_path)) {
+            throw new \Exception(
+                sprintf('"%s" already exists!', $repository_path)
+            );
+        } elseif (file_exists($repository_path) && is_dir($repository_path) && file_exists($repository_path."/.git") && is_dir($repository_path."/.git")) {
+            throw new \Exception(
+                sprintf('"%s" is already a git repository!', $repository_path)
+            );
+        } else {
+            if (!mkdir($repository_path)) {
                 throw new \Exception(
                     sprintf('Can not create directory "%s"!', $repository_path)
                 );
-		    }
-			$repo = new self($repository_path, true, false);
-			if (is_string($source)) {
-				$repo->cloneFrom($source);
-			} else {
-				$repo->run('init');
-			}
-			return $repo;
-		}
-	}
+            }
+            $repo = new self($repository_path, true, false);
+            if (is_string($source)) {
+                $repo->cloneFrom($source);
+            } else {
+                $repo->run('init');
+            }
+            return $repo;
+        }
+    }
 
-	/**
-	 * Set the repository's path
-	 *
-	 * @param string $path
-	 * @param bool $create_new
-	 * @return void
-	 */
-	public function setRepositoryPath($repository_path, $createNew = false, $_init = true)
-	{
-		if (is_string($repository_path)) {
-			if ($new_path = realpath($repository_path)) {
-				$repository_path = $new_path;
-				if (is_dir($repository_path)) {
-					if (file_exists($repository_path."/.git") && is_dir($repository_path."/.git")) {
-						$this->repository_path = $repository_path;
-					} else {
-						if ($createNew) {
-							$this->repository_path = $repository_path;
-							if ($_init) {
-								$this->run('init');
-							}
-						} else {
-							throw new \Exception(
-							    sprintf('"%s" is not a git repository!', $repository_path)
-							);
-						}
-					}
-				} else {
-					throw new \Exception(
-					    sprintf('"%s" is not a directory', $repository_path)
-					);
-				}
-			} else {
-				if ($createNew) {
-					if ($parent = realpath(dirname($repository_path))) {
-						mkdir($repository_path);
-						$this->repository_path = $repository_path;
-						if ($_init) $this->run('init');
-					} else {
-						throw new \Exception('Cannot create repository in non-existent directory');
-					}
-				} else {
-					throw new \Exception(
-					    sprintf('"%s" does not exist', $repository_path)
-					);
-				}
-			}
-		}
-	}
+    /**
+     * Set the repository's path
+     *
+     * @param   string $repository_path
+     * @param   bool $createNew
+     * @param   bool $_init
+     * @return  void
+     * @throws  \Exception
+     */
+    public function setRepositoryPath($repository_path, $createNew = false, $_init = true)
+    {
+        if (is_string($repository_path)) {
+            if ($new_path = realpath($repository_path)) {
+                $repository_path = $new_path;
+                if (is_dir($repository_path)) {
+                    if (file_exists($repository_path."/.git") && is_dir($repository_path."/.git")) {
+                        $this->repository_path = $repository_path;
+                    } else {
+                        if ($createNew) {
+                            $this->repository_path = $repository_path;
+                            if ($_init) {
+                                $this->run('init');
+                            }
+                        } else {
+                            throw new \Exception(
+                                sprintf('"%s" is not a git repository!', $repository_path)
+                            );
+                        }
+                    }
+                } else {
+                    throw new \Exception(
+                        sprintf('"%s" is not a directory', $repository_path)
+                    );
+                }
+            } else {
+                if ($createNew) {
+                    if ($parent = realpath(dirname($repository_path))) {
+                        mkdir($repository_path);
+                        $this->repository_path = $repository_path;
+                        if ($_init) $this->run('init');
+                    } else {
+                        throw new \Exception('Cannot create repository in non-existent directory');
+                    }
+                } else {
+                    throw new \Exception(
+                        sprintf('"%s" does not exist', $repository_path)
+                    );
+                }
+            }
+        }
+    }
 
-	/**
-	 * Tests if git is installed
-	 *
-	 * @access  public
-	 * @return  bool
-	 */
-	public function testGit() 
-	{
-		$descriptorspec = array(
-			1 => array('pipe', 'w'),
-			2 => array('pipe', 'w'),
-		);
-		$pipes = array();
-		$resource = proc_open(GitApi::getBin(), $descriptorspec, $pipes);
+    /**
+     * Tests if git is installed
+     *
+     * @access  public
+     * @return  bool
+     */
+    public function testGit()
+    {
+        $descriptorspec = array(
+            1 => array('pipe', 'w'),
+            2 => array('pipe', 'w'),
+        );
+        $pipes = array();
+        $resource = proc_open(GitApi::getBin(), $descriptorspec, $pipes);
 
-		$stdout = stream_get_contents($pipes[1]);
-		$stderr = stream_get_contents($pipes[2]);
-		foreach ($pipes as $pipe) {
-			fclose($pipe);
-		}
+        $stdout = stream_get_contents($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        foreach ($pipes as $pipe) {
+            fclose($pipe);
+        }
 
-		$status = trim(proc_close($resource));
-		return ($status != 127);
-	}
+        $status = trim(proc_close($resource));
+        return ($status != 127);
+    }
 
-	/**
-	 * Run a git command in the git repository
-	 *
-	 * @param string $command
-	 * @return string
-	 */
-	public function run($command)
-	{
-		return $this->getGitConsole()->run(GitApi::getBin()." ".$command, $this->getRepositoryPath());
-	}
+    /**
+     * Run a git command in the git repository
+     *
+     * @param string $command
+     * @return string
+     */
+    public function run($command)
+    {
+        return $this->getGitConsole()->run(GitApi::getBin()." ".$command, $this->getRepositoryPath());
+    }
 
     public function getRemoteOriginUrl()
     {
-		return $this->run("config --get remote.origin.url");
+        return $this->run("config --get remote.origin.url");
     }
 
     public function getCommitsList()
     {
-		$history_stack = explode("\n", $this->run("log --pretty=oneline"));
-		$history=array();
-		if (!empty($history_stack)) {
-    		foreach ($history_stack as $entry) {
-    		    if (strlen($entry)) {
-        		    $history[ substr($entry, 0, strpos($entry, ' ')) ] = substr($entry, strpos($entry, ' ')+1);
-        		}
-    		}
-		}
+        $history_stack = explode("\n", $this->run("log --pretty=oneline"));
+        $history=array();
+        if (!empty($history_stack)) {
+            foreach ($history_stack as $entry) {
+                if (strlen($entry)) {
+                    $history[ substr($entry, 0, strpos($entry, ' ')) ] = substr($entry, strpos($entry, ' ')+1);
+                }
+            }
+        }
         return $history;
     }
 
@@ -282,21 +287,21 @@ class Repository
     public function getCommitsHistory()
     {
         $cmd = sprintf('log --date=iso --pretty=format:%s', "'".self::$full_pretty_format."'");
-		$response = explode("\n\n", $this->run($cmd));
-		$data=array();
-		if (!empty($response)) {
-    		foreach ($response as $entry) {
-        		$commit = $this->_parseCommitLog( $entry );
-        		if (!empty($commit)) {
-            		if (isset($commit['commit-abbrev'])) {
-                    	$data[ $commit['commit-abbrev'] ] = $commit;
+        $response = explode("\n\n", $this->run($cmd));
+        $data=array();
+        if (!empty($response)) {
+            foreach ($response as $entry) {
+                $commit = $this->_parseCommitLog( $entry );
+                if (!empty($commit)) {
+                    if (isset($commit['commit-abbrev'])) {
+                        $data[ $commit['commit-abbrev'] ] = $commit;
                     } else {
-                    	$data[] = $commit;
+                        $data[] = $commit;
                     }
-        		}
-    		}
-		}
-		array_filter($data);
+                }
+            }
+        }
+        array_filter($data);
         return $data;
     }
 
@@ -305,7 +310,7 @@ class Repository
         $cmd_mask = 'log -1 --date=iso --pretty=format:%s'.(!is_null($path) ? ' -- '.$path : '');
         $cmd = sprintf($cmd_mask, "'".self::$full_pretty_format."'");
         $data = $this->_parseCommitLog( $this->run($cmd) );
-		array_filter($data);
+        array_filter($data);
         return $data;
     }
 
@@ -327,7 +332,7 @@ class Repository
         $data = $this->_parseCommitLog( $result );
         $data['changes'] = $this->getCommitChanges($hash);
         $data['diff'] = $this->_parseCommitDiff( $diff );
-		array_filter($data);
+        array_filter($data);
         return $data;
     }
 
@@ -437,28 +442,28 @@ class Repository
         $cmd_mask = 'show %s --name-status --pretty="format:" -M';
         $cmd = sprintf($cmd_mask, $hash);
         $data = $this->_parseCommitChanges( $this->run($cmd) );
-		array_filter($data);
+        array_filter($data);
         return $data;
     }
 
     public function getCommitersList()
     {
         $response = explode("\n", $this->run("log --format='%aN %ae'") );
-		$data=array();
-		if (!empty($response)) {
-    		foreach ($response as $entry) {
-        		$name = substr($entry, 0, strrpos($entry, ' '));
-        		$email = substr($entry, strrpos($entry, ' ')+1);
-        		if (!empty($name)) {
-        		    if (!isset($data[$name])) {
+        $data=array();
+        if (!empty($response)) {
+            foreach ($response as $entry) {
+                $name = substr($entry, 0, strrpos($entry, ' '));
+                $email = substr($entry, strrpos($entry, ' ')+1);
+                if (!empty($name)) {
+                    if (!isset($data[$name])) {
                         $data[$name] = array('name'=>$name, 'email'=>$email, 'commits'=>1);
                     } else {
                         $data[$name]['commits']++;
                     }
-        		}
-    		}
-		}
-		array_filter($data);
+                }
+            }
+        }
+        array_filter($data);
         return $data;
     }
 
@@ -504,7 +509,7 @@ class Repository
         $tree = array();
         if (!empty($result)) {
             foreach($result as $i=>$entry) {
-                $tree_entry = $this->_parseTreeEntry($entry);                
+                $tree_entry = $this->_parseTreeEntry($entry);
                 if (!empty($tree_entry)) {
                     $tree[] = $tree_entry;
                 }
@@ -553,226 +558,214 @@ class Repository
         return '';
     }
 
-	/**
-	 * Runs a `git add` call
-	 *
-	 * Accepts a list of files to add
-	 *
-	 * @access  public
-	 * @param   mixed   files to add
-	 * @return  string
-	 */
-	public function add($files = "*")
-	{
-		if (is_array($files)) {
-			$files = '"'.implode('" "', $files).'"';
-		}
-		return $this->run("add $files -v");
-	}
+    /**
+     * Runs a `git add` call
+     *
+     * Accepts a list of files to add
+     *
+     * @param   mixed   $files files to add
+     * @return  string
+     */
+    public function add($files = "*")
+    {
+        if (is_array($files)) {
+            $files = '"'.implode('" "', $files).'"';
+        }
+        return $this->run("add $files -v");
+    }
 
-	/**
-	 * Runs a `git commit` call
-	 *
-	 * Accepts a commit message string
-	 *
-	 * @access  public
-	 * @param   string  commit message
-	 * @return  string
-	 */
-	public function commit($message = "")
-	{
-		return $this->run("commit -av -m ".escapeshellarg($message));
-	}
+    /**
+     * Runs a `git commit` call
+     *
+     * Accepts a commit message string
+     *
+     * @param   string  $message commit message
+     * @return  string
+     */
+    public function commit($message = "")
+    {
+        return $this->run("commit -av -m ".escapeshellarg($message));
+    }
 
-	/**
-	 * Runs a `git clone` call to clone the current repository
-	 * into a different directory
-	 *
-	 * Accepts a target directory
-	 *
-	 * @access  public
-	 * @param   string  target directory
-	 * @return  string
-	 */
-	public function cloneTo($target)
-	{
-		return $this->run("clone --local ".$this->repository_path." $target");
-	}
+    /**
+     * Runs a `git clone` call to clone the current repository
+     * into a different directory
+     *
+     * Accepts a target directory
+     *
+     * @param   string  $target target directory
+     * @return  string
+     */
+    public function cloneTo($target)
+    {
+        return $this->run("clone --local ".$this->repository_path." $target");
+    }
 
-	/**
-	 * Runs a `git clone` call to clone a different repository
-	 * into the current repository
-	 *
-	 * Accepts a source directory
-	 *
-	 * @access  public
-	 * @param   string  source directory
-	 * @return  string
-	 */
-	public function cloneFrom($source)
-	{
-		return $this->run("clone --local $source ".$this->repository_path);
-	}
+    /**
+     * Runs a `git clone` call to clone a different repository
+     * into the current repository
+     *
+     * Accepts a source directory
+     *
+     * @param   string  $source source directory
+     * @return  string
+     */
+    public function cloneFrom($source)
+    {
+        return $this->run("clone --local $source ".$this->repository_path);
+    }
 
-	/**
-	 * Runs a `git clone` call to clone a remote repository
-	 * into the current repository
-	 *
-	 * Accepts a source url
-	 *
-	 * @access  public
-	 * @param   string  source url
-	 * @return  string
-	 */
-	public function cloneRemote($source)
-	{
-		return $this->run("clone $source ".$this->repository_path);
-	}
+    /**
+     * Runs a `git clone` call to clone a remote repository
+     * into the current repository
+     *
+     * Accepts a source url
+     *
+     * @param   string  $source source url
+     * @return  string
+     */
+    public function cloneRemote($source)
+    {
+        return $this->run("clone $source ".$this->repository_path);
+    }
 
-	/**
-	 * Runs a `git clean` call
-	 *
-	 * Accepts a remove directories flag
-	 *
-	 * @access  public
-	 * @param   bool    delete directories?
-	 * @return  string
-	 */
-	public function clean($dirs = false)
-	{
-		return $this->run("clean".(($dirs) ? " -d" : ""));
-	}
+    /**
+     * Runs a `git clean` call
+     *
+     * Accepts a remove directories flag
+     *
+     * @param   bool    $dirs delete directories?
+     * @return  string
+     */
+    public function clean($dirs = false)
+    {
+        return $this->run("clean".(($dirs) ? " -d" : ""));
+    }
 
-	/**
-	 * Runs a `git branch` call
-	 *
-	 * Accepts a name for the branch
-	 *
-	 * @access  public
-	 * @param   string  branch name
-	 * @return  string
-	 */
-	public function createBranch($branch)
-	{
-		return $this->run("branch $branch");
-	}
+    /**
+     * Runs a `git branch` call
+     *
+     * Accepts a name for the branch
+     *
+     * @param   string  $branch branch name
+     * @return  string
+     */
+    public function createBranch($branch)
+    {
+        return $this->run("branch $branch");
+    }
 
-	/**
-	 * Runs a `git branch -[d|D]` call
-	 *
-	 * Accepts a name for the branch
-	 *
-	 * @access  public
-	 * @param   string  branch name
-	 * @return  string
-	 */
-	public function deleteBranch($branch, $force = false)
-	{
-		return $this->run("branch ".(($force) ? '-D' : '-d')." $branch");
-	}
+    /**
+     * Runs a `git branch -[d|D]` call
+     *
+     * Accepts a name for the branch
+     *
+     * @param   string  $branch branch name
+     * @param   bool    $force
+     * @return  string
+     */
+    public function deleteBranch($branch, $force = false)
+    {
+        return $this->run("branch ".(($force) ? '-D' : '-d')." $branch");
+    }
 
-	/**
-	 * Runs a `git branch` call
-	 *
-	 * @access  public
-	 * @param   bool    keep asterisk mark on active branch
-	 * @return  array
-	 */
-	public function getBranchesList($keep_asterisk = false)
-	{
-		$branchArray = explode("\n", $this->run("branch"));
-		foreach($branchArray as $i => &$branch) {
-			$branch = trim($branch);
-			if (! $keep_asterisk) {
-				$branch = str_replace("* ", "", $branch);
-			}
-			if ($branch == "") {
-				unset($branchArray[$i]);
-			}
-		}
-		return $branchArray;
-	}
+    /**
+     * Runs a `git branch` call
+     *
+     * @param   bool    $keep_asterisk keep asterisk mark on active branch
+     * @return  array
+     */
+    public function getBranchesList($keep_asterisk = false)
+    {
+        $branchArray = explode("\n", $this->run("branch"));
+        foreach($branchArray as $i => &$branch) {
+            $branch = trim($branch);
+            if (! $keep_asterisk) {
+                $branch = str_replace("* ", "", $branch);
+            }
+            if ($branch == "") {
+                unset($branchArray[$i]);
+            }
+        }
+        return $branchArray;
+    }
 
-	/**
-	 * Returns name of active branch
-	 *
-	 * @access  public
-	 * @param   bool    keep asterisk mark on branch name
-	 * @return  string
-	 */
-	public function getCurrentBranch($keep_asterisk = false)
-	{
-		$branchArray = $this->getBranchesList(true);
-		$getCurrentBranch = preg_grep("/^\*/", $branchArray);
-		reset($getCurrentBranch);
-		if ($keep_asterisk) {
-			return current($getCurrentBranch);
-		} else {
-			return str_replace("* ", "", current($getCurrentBranch));
-		}
-	}
+    /**
+     * Returns name of active branch
+     *
+     * @param   bool    $keep_asterisk keep asterisk mark on branch name
+     * @return  string
+     */
+    public function getCurrentBranch($keep_asterisk = false)
+    {
+        $branchArray = $this->getBranchesList(true);
+        $getCurrentBranch = preg_grep("/^\*/", $branchArray);
+        reset($getCurrentBranch);
+        if ($keep_asterisk) {
+            return current($getCurrentBranch);
+        } else {
+            return str_replace("* ", "", current($getCurrentBranch));
+        }
+    }
 
-	/**
-	 * Runs a `git checkout` call
-	 *
-	 * Accepts a name for the branch
-	 *
-	 * @access  public
-	 * @param   string  branch name
-	 * @return  string
-	 */
-	public function checkout($branch)
-	{
-		return $this->run("checkout $branch");
-	}
+    /**
+     * Runs a `git checkout` call
+     *
+     * Accepts a name for the branch
+     *
+     * @param   string  $branch branch name
+     * @return  string
+     */
+    public function checkout($branch)
+    {
+        return $this->run("checkout $branch");
+    }
 
 
-	/**
-	 * Runs a `git merge` call
-	 *
-	 * Accepts a name for the branch to be merged
-	 *
-	 * @access  public
-	 * @param   string $branch
-	 * @return  string
-	 */
-	public function merge($branch)
-	{
-		return $this->run("merge $branch --no-ff");
-	}
+    /**
+     * Runs a `git merge` call
+     *
+     * Accepts a name for the branch to be merged
+     *
+     * @param   string $branch
+     * @return  string
+     */
+    public function merge($branch)
+    {
+        return $this->run("merge $branch --no-ff");
+    }
 
 
-	/**
-	 * Runs a git fetch on the current branch
-	 *
-	 * @access  public
-	 * @return  string
-	 */
-	public function fetch() 
-	{
-		return $this->run("fetch");
-	}
+    /**
+     * Runs a git fetch on the current branch
+     *
+     * @return  string
+     */
+    public function fetch()
+    {
+        return $this->run("fetch");
+    }
 
     public function getTagsList()
     {
 //		return array_filter( explode("\n", $this->run("describe --tags --abbrev=0")) );
-		$result = explode("\n", $this->run("tag -l -n"));
-		$results=array();
-		foreach($result as $_tag) {
-		    if (!empty($_tag)) {
-        		$_tag_infos = explode(" ", $_tag);
-        		$tag_name = $tag_message = '';
-        		foreach($_tag_infos as $i=>$_info) {
-        		    if ($i===0) $tag_name = $_info;
-        		    elseif (!empty($_info)) $tag_message .= ' '.$_info;
-        		}
-	    	    $results[] = array(
-		            'tag_name' => trim($tag_name),
-		            'message' => trim($tag_message)
-    		    );
-    		}
-		}
-		return $results;
+        $result = explode("\n", $this->run("tag -l -n"));
+        $results=array();
+        foreach($result as $_tag) {
+            if (!empty($_tag)) {
+                $_tag_infos = explode(" ", $_tag);
+                $tag_name = $tag_message = '';
+                foreach($_tag_infos as $i=>$_info) {
+                    if ($i===0) $tag_name = $_info;
+                    elseif (!empty($_info)) $tag_message .= ' '.$_info;
+                }
+                $results[] = array(
+                    'tag_name' => trim($tag_name),
+                    'message' => trim($tag_message)
+                );
+            }
+        }
+        return $results;
     }
 
     public function buildTagTarball($tagname, $target_dir, $target_file = 'auto', $format = 'tar')
@@ -813,73 +806,73 @@ class Repository
         return $target_realpath;
     }
 
-	/**
-	 * Add a new tag on the current position
-	 *
-	 * Accepts the name for the tag and the message
-	 *
-	 * @param string $tag
-	 * @param string $message
-	 * @return string
-	 */
-	public function addTag($tag, $message = null)
-	{
-		if ($message === null) {
-			$message = $tag;
-		}
-		return $this->run("tag -a $tag -m $message");
-	}
+    /**
+     * Add a new tag on the current position
+     *
+     * Accepts the name for the tag and the message
+     *
+     * @param string $tag
+     * @param string $message
+     * @return string
+     */
+    public function addTag($tag, $message = null)
+    {
+        if ($message === null) {
+            $message = $tag;
+        }
+        return $this->run("tag -a $tag -m $message");
+    }
 
 
-	/**
-	 * Push specific branch to a remote
-	 *
-	 * Accepts the name of the remote and local branch
-	 *
-	 * @param string $remote
-	 * @param string $branch
-	 * @return string
-	 */
-	public function push($remote, $branch)
-	{
-		return $this->run("push --tags $remote $branch");
-	}
-	
-	/**
-	 * Pull specific branch from remote
-	 *
-	 * Accepts the name of the remote and local branch
-	 *
-	 * @param string $remote
-	 * @param string $branch
-	 * @return string
-	 */
-	public function pull($remote, $branch)
-	{
-		return $this->run("pull $remote $branch");
-	}
+    /**
+     * Push specific branch to a remote
+     *
+     * Accepts the name of the remote and local branch
+     *
+     * @param string $remote
+     * @param string $branch
+     * @return string
+     */
+    public function push($remote, $branch)
+    {
+        return $this->run("push --tags $remote $branch");
+    }
 
-	/**
-	 * Sets the project description.
-	 *
-	 * @param string $new
-	 */
-	public function setDescription($new)
-	{
-		file_put_contents($this->repository_path."/.git/description", $new);
-	}
+    /**
+     * Pull specific branch from remote
+     *
+     * Accepts the name of the remote and local branch
+     *
+     * @param string $remote
+     * @param string $branch
+     * @return string
+     */
+    public function pull($remote, $branch)
+    {
+        return $this->run("pull $remote $branch");
+    }
 
-	/**
-	 * Gets the project description.
-	 *
-	 * @return string
-	 */
-	public function getDescription() 
-	{
-	    $_f = $this->repository_path."/.git/description";
-		return file_exists($_f) ? file_get_contents($_f) : null;
-	}
-	
+    /**
+     * Sets the project description.
+     *
+     * @param string $new
+     */
+    public function setDescription($new)
+    {
+        file_put_contents($this->repository_path."/.git/description", $new);
+    }
+
+    /**
+     * Gets the project description.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        $_f = $this->repository_path."/.git/description";
+        return file_exists($_f) ? file_get_contents($_f) : null;
+    }
+
 }
 
 // Endfile
