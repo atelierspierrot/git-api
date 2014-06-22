@@ -17,22 +17,25 @@ use Library\Command;
 class GitCommand extends Command
 {
 
-	/**
-	 * Run a command in the git repository
-	 *
-	 * Accepts a shell command to run
-	 *
-	 * @param   string  command to run
-	 * @return  string
-	 */
+    /**
+     * Run a command in the git repository
+     *
+     * Accepts a shell command to run
+     *
+     * @param   string  $command command to run
+     * @param   string  $repository
+     * @param   bool    $force
+     * @return  string
+     * @throws  \GitApi\GitRuntimeException for any caught exception
+     */
     public function run($command, $repository = null, $force = false)
-	{
+    {
         list($stdout, $status, $stderr) = parent::run($command, $repository);
         if (!empty($stderr)) {
             throw new GitRuntimeException($stderr);
         }
-		return $stdout;
-	}
+        return $stdout;
+    }
 
 }
 
