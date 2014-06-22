@@ -42,7 +42,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_run">run</a>($command, $repository = null, $force = false)
+                    <a href="#method_run">run</a>(string $command, string $repository = null, bool $force = false)
                     <p>Run a command in the git repository</p>
                 </td>
                 <td></td>
@@ -53,9 +53,9 @@
         <h2>Details</h2>
 
                         <h3 id="method_run">
-        <div class="location">at line 28</div>
+        <div class="location">at line 31</div>
         <code>            public            string
-    <strong>run</strong>($command, $repository = null, $force = false)</code>
+    <strong>run</strong>(string $command, string $repository = null, bool $force = false)</code>
     </h3>
     <div class="details">
         <p>Run a command in the git repository</p>
@@ -65,19 +65,18 @@
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$command</td>
-                <td>
-</td>
+                <td>command to run</td>
             </tr>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$repository</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
+                <td>bool</td>
                 <td>$force</td>
                 <td>
 </td>
@@ -96,6 +95,15 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../GitApi/GitRuntimeException.html"><abbr title="GitApi\GitRuntimeException">GitRuntimeException</abbr></a></td>
+                <td>for any caught exception</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>
