@@ -8,56 +8,59 @@ A PHP API to get infos and manage a [GIT](http://git-scm.com/) distant or local 
 
 Working with a local repository clone:
 
-    // open a repo
-    $local_repo = ~/repositories/git-api
-    $repo = \GitApi\GitApi::open($local_repo)
+```php
+// open a repo
+$local_repo = ~/repositories/git-api
+$repo = \GitApi\GitApi::open($local_repo)
 
-    // commiters list
-    $repo->getCommitersList()
+// commiters list
+$repo->getCommitersList()
 
-    // branches list
-    $repo->getBranchesList()
+// branches list
+$repo->getBranchesList()
 
-    // commits list
-    $repo->getCommitsList()
+// commits list
+$repo->getCommitsList()
 
-    // current branch
-    $repo->getCurrentBranch()
+// current branch
+$repo->getCurrentBranch()
 
-    // description
-    $repo->getDescription()
+// description
+$repo->getDescription()
 
-    // tags list
-    $repo->getTagsList()
+// tags list
+$repo->getTagsList()
 
-    // last commit infos
-    $repo->getLastCommitInfos()
+// last commit infos
+$repo->getLastCommitInfos()
 
-    // tree
-    $repo->getTree()
+// tree
+$repo->getTree()
 
-    // tree for first dir
-    $repo->getTree('HEAD', $first_dir)
+// tree for first dir
+$repo->getTree('HEAD', $first_dir)
 
-    // files info
-    $repo->getFilesInfo()
+// files info
+$repo->getFilesInfo()
 
-    // recursive tree
-    $repo->getRecursiveTree()
+// recursive tree
+$repo->getRecursiveTree()
 
-    // commits history
-    $repo->getCommitsHistory()
+// commits history
+$repo->getCommitsHistory()
+```
 
 Working with a distant repository URL will create a local clone:
 
-    // create a clone of a distant repo in a local dir
-    // if the local clone already exists, a `git pull` will be processed on it
-    $distant_repo = https://github.com/atelierspierrot/git-api
-    $local_repo = ~/repositories/git-api
-    $repo = \GitApi\GitApi::create($local_repo, $distant_repo)
-    
-    // ... same as above
+```php
+// create a clone of a distant repo in a local dir
+// if the local clone already exists, a `git pull` will be processed on it
+$distant_repo = https://github.com/atelierspierrot/git-api
+$local_repo = ~/repositories/git-api
+$repo = \GitApi\GitApi::create($local_repo, $distant_repo)
 
+// ... same as above
+```
 
 ## Installation & usage
 
@@ -74,18 +77,21 @@ from Github.
 Then, to use the package classes, you just need to register the `GitApi` namespace directory
 using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom autoloader:
 
-    require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
-    $classLoader = new SplClassLoader('GitApi', '/path/to/package/src');
-    $classLoader->register();
+```php
+require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
+$classLoader = new SplClassLoader('GitApi', '/path/to/package/src');
+$classLoader->register();
+```
 
 If you are a [Composer](http://getcomposer.org/) user, just add the package to your requirements
 in your `composer.json`:
 
-    "require": {
-        ...
-        "atelierspierrot/git-api": "dev-master"
-    }
-
+```json
+"require": {
+    "your/deps": "*",
+    "atelierspierrot/git-api": "dev-master"
+}
+```
 
 ## Development
 
@@ -106,16 +112,16 @@ The latest version of this documentation is available online at <http://docs.ate
 
 >    http://github.com/atelierspierrot/git-api
 
->    Copyleft (ↄ) 2013-2015 Pierre Cassat and contributors
+>    Copyright (c) 2013-2015 Pierre Cassat and contributors
 
->    Licensed under the GPL Version 3 license.
+>    Licensed under the Apache 2.0 license.
 
->    http://opensource.org/licenses/GPL-3.0
+>    http://www.apache.org/licenses/LICENSE-2.0
 
 >    ----
 
 >    Les Ateliers Pierrot - Paris, France
 
->    <www.ateliers-pierrot.fr> - <contact@ateliers-pierrot.fr>
+>    <http://www.ateliers-pierrot.fr/> - <contact@ateliers-pierrot.fr>
 
 
