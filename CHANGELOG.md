@@ -19,8 +19,6 @@ go to <https://github.com/atelierspierrot/git-api/commit/COMMIT_HASH>.
     * a52ab8f - the package is now under Apache 2.0 license (piwi <me@e-piwi.fr>)
     * 27b665e - Merge branch 'wip' into dev (piwi <me@e-piwi.fr>)
     * 964dda6 - new license notice header for all scripts (piwi <me@e-piwi.fr>)
-    * 0a15fc0 - new license notice header for all scripts (piwi <me@e-piwi.fr>)
-    * 50e0193 - new license notice header for all scripts (piwi <me@e-piwi.fr>)
     * 63b0fce - new documentation generation (piwi <me@e-piwi.fr>)
     * 88337b9 - merge of branch 'master' (happy new year) (piwi <me@e-piwi.fr>)
     * 8019c8d - merge of branch 'wip' (happy new year) (piwi <me@e-piwi.fr>)
@@ -30,14 +28,9 @@ go to <https://github.com/atelierspierrot/git-api/commit/COMMIT_HASH>.
 
 * v1.0.3 (2014-06-22 - 319be9b)
 
-    * 07cdaa8 - cleanup & sources review (Piero Wbmstr <me@e-piwi.fr>)
     * 8fbb738 - cleanup & sources review (Piero Wbmstr <me@e-piwi.fr>)
     * 419a978 - new piwi github username (Piero Wbmstr <me@e-piwi.fr>)
-    * 1d952b2 - new piwi github username (Piero Wbmstr <me@e-piwi.fr>)
-    * 77c1f6d - new piwi github username (Piero Wbmstr <me@e-piwi.fr>)
     * 995f862 - Renaming "PieroWbmstr" in lowercase (Piero Wbmstr <me@e-piwi.fr>)
-    * c28edfc - Renaming "PieroWbmstr" in lowercase (Piero Wbmstr <me@e-piwi.fr>)
-    * efe4b63 - Renaming "PieroWbmstr" in lowercase (Piero Wbmstr <me@e-piwi.fr>)
     * 848d5ed - Updating documentation (Piero Wbmstr <me@e-piwi.fr>)
     * 2eb7bf6 - Merge branch 'master' into dev (Piero Wbmstr <me@e-piwi.fr>)
     * 6a95252 - Master version "gitignore" (Piero Wbmstr <me@e-piwi.fr>)
