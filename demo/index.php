@@ -52,50 +52,67 @@ if (file_exists($a = __DIR__.'/../vendor/autoload.php')) {
 $repo = !empty($_GET) && isset($_GET['repo']) ? $_GET['repo'] : 
     \Library\Helper\Url::resolvePath(__DIR__.'/..', true);
 
+// -----------------------------------
+// Page Content
+// -----------------------------------
+
 ?><!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> <![endif]-->
-    <title>GIT API package demo</title>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="assets/html5boilerplate/css/normalize.css" />
-    <link rel="stylesheet" href="assets/html5boilerplate/css/main.css" />
-    <script src="assets/html5boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
-	<link rel="stylesheet" href="assets/styles.css" />
-    <!--[if lt IE 5.5]> <link rel="stylesheet" href="assets/styles_ie_lt5.5.css" /> <![endif]-->
-    <!--[if gte IE 5.5]> <link rel="stylesheet" href="assets/styles_ie_gte5.5.css" /> <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test & documentation of PHP "git-api" package</title>
+    <meta name="description" content="A set of PHP classes to crypt and uncrypt" />
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
-    <!--[if lt IE 7]>
-        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    <![endif]-->
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
 
-    <header id="top" role="banner">
-        <hgroup>
-            <h1>PHP GIT API package demo</h1>
-            <h2 class="slogan">A PHP API to get infos and manage a GIT distant or local repository.</h2>
-        </hgroup>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Git API</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right" role="navigation">
+                <li><a href="#bottom" title="Go to the bottom of the page">&darr;</a></li>
+                <li><a href="#top" title="Back to the top of the page">&uarr;</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+<div class="container">
+
+    <a id="top"></a>
+
+    <header role="banner">
+        <h1>The PHP "<em>git-api</em>" package <br><small>A PHP API to get infos and manage a <a href="http://git-scm.com/">GIT</a> distant or local repository</small></h1>
         <div class="hat">
-            <p>These pages show and demonstrate the use and functionality of the <a href="https://github.com/atelierspierrot/git-api">atelierspierrot/git-api</a> PHP package you just downloaded.</p>
+            <p>These pages show and demonstrate the use and functionality of the <a href="http://github.com/atelierspierrot/git-api">atelierspierrot/git-api</a> PHP package you just downloaded.</p>
         </div>
     </header>
 
-	<nav>
-        <div class="info">
-            <p><a href="http://github.com/atelierspierrot/git-api">See online on GitHub</a></p>
-            <p class="comment">The sources of this package are hosted on <a href="http://github.com">GitHub</a>. To follow sources updates, report a bug or read opened bug tickets and any other information, please see the GitHub website above.</p>
-        </div>
-
-    	<p class="credits" id="user_agent"></p>
-	</nav>
-
     <div id="content" role="main">
-
-        <article>
 
 <form action="" method="get">
     <label>Repository to test:&nbsp;
@@ -203,53 +220,56 @@ if (!empty($repo)) {
 ?>
 </pre>
 
-        </article>
+        </div>
     </div>
 
-    <footer id="footer">
-		<div class="credits float-left">
-		    This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
-		</div>
-		<div class="credits float-right">
+<footer id="footer">
+    <div class="container">
+        <div class="text-muted pull-left">
+            This page is <a href="" title="Check now online" id="html_validation">HTML5</a> & <a href="" title="Check now online" id="css_validation">CSS3</a> valid.
+        </div>
+        <div class="text-muted pull-right">
             <a href="http://github.com/atelierspierrot/git-api">atelierspierrot/git-api</a> package by <a href="http://github.com/atelierspierrot">Les Ateliers Pierrot</a> under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.
-		</div>
-    </footer>
-
-    <div class="back_menu" id="short_navigation">
-        <a href="#footer" title="Go to the bottom of the page"><span class="text">Go to bottom&nbsp;</span>&darr;</a>
-        &nbsp;|&nbsp;
-        <a href="#top" title="Back to the top of the page"><span class="text">Back to top&nbsp;</span>&uarr;</a>
-        <ul id="short_menu" class="menu" role="navigation"></ul>
+            <p class="text-muted small" id="user_agent"></p>
+        </div>
     </div>
+</footer>
 
-    <div id="message_box" class="msg_box"></div>
+<div id="message_box" class="msg_box"></div>
+<a id="bottom"></a>
 
 <!-- jQuery lib -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="assets/jquery/jquery-last.min.js"><\/script>')</script>
-<script>$.uiBackCompat = false;</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<!-- jQuery.tablesorter plugin
+<script src="assets/js/jquery.tablesorter.min.js"></script>
+-->
 
 <!-- jQuery.highlight plugin -->
-<script src="assets/jquery/jquery.highlight.js"></script>
+<script src="assets/js/highlight.js"></script>
 
 <!-- scripts for demo -->
 <script src="assets/scripts.js"></script>
 
 <script>
-$(function() {
-    initBacklinks();
-    activateMenuItem();
-    getToHash();
-    buildFootNotes();
-    addCSSValidatorLink('assets/styles.css');
-    addHTMLValidatorLink();
-    $("#user_agent").html( navigator.userAgent );
-    $('pre.code').highlight({source:0, indent:'tabs', code_lang: 'data-language'});
-    initHandler('source');
-    $('#source_block_content').text( $('#js_code').html() );
-});
-</script>
-<script id="js_code">
+    $(function() {
+        getToHash();
+        addCSSValidatorLink('assets/styles.css');
+        addHTMLValidatorLink();
+        $("#user_agent").html( navigator.userAgent );
+        $('pre').each(function(i,o) {
+            var dl = $(this).attr('data-language');
+            if (dl) {
+                $(this).addClass('code')
+                    .highlight({indent:'tabs', code_lang: 'data-language'});
+            }
+        });
+        initHandler('classinfo', true);
+        initHandler('plaintext', true);
+    });
 </script>
 </body>
 </html>

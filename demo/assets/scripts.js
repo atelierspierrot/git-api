@@ -1,41 +1,21 @@
 /* Scripts for demo */
 
-// Avoid `console` errors in browsers that lack a console.
-(function() {
-    var method;
-    var noop = function () {};
-    var methods = [
-        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-        'timeStamp', 'trace', 'warn'
-    ];
-    var length = methods.length;
-    var console = (window.console = window.console || {});
-
-    while (length--) {
-        method = methods[length];
-
-        // Only stub undefined methods.
-        if (!console[method]) {
-            console[method] = noop;
-        }
-    }
-}());
-
-// Place any jQuery/helper plugins in here.
-
 function initHandler( _name, opened ){
     var elt_handler = $('#'+_name+'_handler'),
+        elt_handler_icon = elt_handler.find('.fa'),
         elt_block = $('#'+_name);
     if (opened==undefined || opened==false) {
         elt_block.hide();
     } else {
-        elt_handler.addClass('down');
+        elt_handler_icon.removeClass('fa-caret-right').addClass('fa-caret-down');
     }
     elt_handler.click(function(){ 
         elt_block.toggle('slow');
-        elt_handler.toggleClass('down');
+        if (elt_handler_icon.hasClass('fa-caret-down')) {
+            elt_handler_icon.removeClass('fa-caret-down').addClass('fa-caret-right');
+        } else {
+            elt_handler_icon.removeClass('fa-caret-right').addClass('fa-caret-down');
+        }
     });
 }
 
@@ -116,35 +96,6 @@ function getUrlFilename( url ){
     return filename.substring(filename.lastIndexOf('/')+1);
 }
 
-function activateMenuItem() {
-    var _done = false,
-        query = getUrlFilenameAndQuery( window.location.href );
-    $('nav li').each(function(i,o){
-        var atag = $(o).find('a').first();
-        if (atag) {
-            atag.bind('click', function(){
-                $('nav li').each(function(j,p){
-                    var natag = $(p).find('a').first();
-                    if (natag && natag.hasClass('active')) { natag.removeClass('active'); }
-                });
-                $(this).addClass('active');
-                updateBacklinks();
-            });
-            if (atag.attr('href')===query) {
-                atag.addClass('active');
-                _done = true;
-            }
-        }
-    });
-    if (!_done) {
-        var page = getUrlFilename( window.location.href );
-        $('nav li').each(function(i,o){
-            var atag = $(o).find('a').first();
-            if (atag && atag.attr('href')===page) { atag.addClass('active'); }
-        });
-    }
-}
-
 function getToHash(){
     var _hash = window.location.hash;
     if (_hash!==undefined) {
@@ -156,32 +107,6 @@ function getToHash(){
     }
 }
 
-function updateBacklinks() {
-    $('#short_menu').html( $('#navigation_menu').html() );
-}
-
-function initBacklinks(){
-    $('#short_navigation').hide();
-    $('#short_menu').hide();
-    $('#short_menu_handler').bind('mouseover', function(){
-        var short_menu = $('#short_menu'),
-            short_menu_ln = $('#short_menu').html().length;
-        updateBacklinks();
-        $('#short_menu').fadeIn('slow', function(){
-            $('#short_navigation').bind('mouseleave', function(){ $('#short_menu').fadeOut('slow'); });
-        });
-    });
-    $(window).scroll(function(){
-        var nav = $('nav'),
-            nav_poz = nav.position();
-        if ((nav_poz.top+$('nav').height()) < $(window).scrollTop()) {
-            $('#short_navigation').fadeIn('slow');
-        } else {
-            $('#short_navigation').fadeOut('slow');
-        }
-    });
-}
-
 function addCSSValidatorLink( css_filename ){
     var url = window.location.href,
         cssfile = url.replace(/(.*)\/.*(\.html$)/i, '$1/'+css_filename);
@@ -191,43 +116,6 @@ function addCSSValidatorLink( css_filename ){
 function addHTMLValidatorLink( url ){
     if (url===undefined || url===null) { var url = window.location.href; }
     $('#footer a#html_validation').attr('href', 'http://html5.validator.nu/?showimagereport=yes&showsource=yes&doc='+encodeURIComponent(url));
-}
-
-var FootNotesStack = [];
-function buildFootNotes(){
-    var bl_sup = $('<sup />'),
-        bl_a_hdlr = $('<a />', { 'class':'footnote_link', 'title':'See footnote' }),
-        bl_a_back = $('<a />', { 'class':'footnote_link', 'title':'Back in content' }).html('&#8617;'),
-        bl_note = $('<li />');
-    $('.note').each(function(i,o){
-        var ref = $(this).attr('data-noteref'), hdlr_id, note_id;
-        if ($.inArray(ref, FootNotesStack)!==-1) {
-            var j = parseInt($.inArray(ref, FootNotesStack)+1);
-            hdlr_id = 'note_'+j+'_intext';
-            note_id = 'note_'+j;
-        }
-        else {
-            var j = parseInt(FootNotesStack.length+1),
-                note_ctt = $(this).html(),
-                note_item = bl_note.clone(),
-                note_back = bl_a_back.clone();
-            hdlr_id = 'note_'+j+'_intext';
-            note_id = 'note_'+j;
-            note_back.attr('href', '#'+hdlr_id);
-            note_item.attr('id', note_id);
-            note_item.html(note_ctt+'&nbsp;');
-            note_item.append(note_back);
-            $('#footnotes_list').append(note_item);
-            FootNotesStack.push(ref || j);
-        }
-        var note_hdlr = bl_a_hdlr.clone(),
-            note_sup = bl_sup.clone();
-        note_hdlr.attr('href', '#'+note_id);
-        note_hdlr.attr('id', hdlr_id);
-        note_hdlr.html(j);
-        note_sup.append(note_hdlr);
-        $(this).replaceWith(note_sup);
-    });
 }
 
 function addMessage( str ){
