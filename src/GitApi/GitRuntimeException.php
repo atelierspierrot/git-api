@@ -22,6 +22,9 @@
 
 namespace GitApi;
 
+/**
+ * @author  piwi <me@e-piwi.fr>
+ */
 class GitRuntimeException extends \RuntimeException
 {
 }

@@ -24,6 +24,8 @@ namespace GitApi;
 
 /**
  * Largely inspired from <http://github.com/kbjr/Git.php>
+ *
+ * @author  piwi <me@e-piwi.fr>
  */
 class Repository
 {

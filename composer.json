@@ -19,7 +19,7 @@
         "atelierspierrot/library": "1.*"
     },
     "require-dev": {
-        "sami/sami": "dev-master"
+        "sami/sami": "@stable"
     },
     "autoload": { "psr-0": {"GitApi": "src"} },
     "extra": {
