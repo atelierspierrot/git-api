@@ -1,10 +1,13 @@
 GIT API
 =======
 
+[![demonstration](http://img.ateliers-pierrot-static.fr/see-the-demo.svg)](http://sites.ateliers-pierrot.fr/git-api/)
+[![documentation](http://img.ateliers-pierrot-static.fr/read-the-doc.svg)](http://docs.ateliers-pierrot.fr/git-api/)
 A PHP API to get infos and manage a [GIT](http://git-scm.com/) distant or local repository.
 
 
-## Usage
+Usage
+-----
 
 Working with a local repository clone:
 
@@ -62,51 +65,29 @@ $repo = \GitApi\GitApi::create($local_repo, $distant_repo)
 // ... same as above
 ```
 
-## Installation & usage
 
-You can use this package in your work in many ways.
+Installation
+------------
 
-First, you can clone the [GitHub](https://github.com/atelierspierrot/git-api) repository
-and include it "as is" in your poject:
+For a complete information about how to install this package and load its namespace, 
+please have a look at [our *USAGE* documentation](http://github.com/atelierspierrot/atelierspierrot/blob/master/USAGE.md).
 
-    https://github.com/atelierspierrot/git-api
-
-You can also download an [archive](https://github.com/atelierspierrot/git-api/downloads)
-from Github.
-
-Then, to use the package classes, you just need to register the `GitApi` namespace directory
-using the [SplClassLoader](https://gist.github.com/jwage/221634) or any other custom autoloader:
-
-```php
-require_once '.../src/SplClassLoader.php'; // if required, a copy is proposed in the package
-$classLoader = new SplClassLoader('GitApi', '/path/to/package/src');
-$classLoader->register();
-```
-
-If you are a [Composer](http://getcomposer.org/) user, just add the package to your requirements
-in your `composer.json`:
+If you are a [Composer](http://getcomposer.org/) user, just add the package to the 
+requirements of your project's `composer.json` manifest file:
 
 ```json
-"require": {
-    "your/deps": "*",
-    "atelierspierrot/git-api": "dev-master"
-}
+"atelierspierrot/git-api": "@stable"
 ```
 
-## Development
+You can use a specific release or the latest release of a major version using the appropriate
+[version constraint](http://getcomposer.org/doc/01-basic-usage.md#package-versions).
 
-To install all PHP packages for development, just run:
-
-    ~$ composer install --dev
-
-A documentation can be generated with [Sami](https://github.com/fabpot/Sami) running:
-
-    ~$ php vendor/sami/sami/sami.php render sami.config.php
-
-The latest version of this documentation is available online at <http://docs.ateliers-pierrot.fr/git-api/>.
+Please note that this package depends on the externals [PHP Patterns](http://github.com/atelierspierrot/patterns)
+and [PHP Library](http://github.com/atelierspierrot/library).
 
 
-## Author & License
+Author & License
+----------------
 
 >    GIT API
 
