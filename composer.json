@@ -4,7 +4,7 @@
     "description": "A PHP API to get infos and manage a GIT distant or local repository",
     "keywords": [ "VCS", "GIT" ],
     "homepage": "http://github.com/atelierspierrot/git-api",
-    "license": "GPL-3.0",
+    "license": "Apache-2.0",
     "authors": [{
         "name": "Les Ateliers Pierrot & contributors",
         "email": "contact@ateliers-pierrot.fr",
