@@ -9,7 +9,7 @@
  */
 //@ini_set('display_errors','1'); @error_reporting(E_ALL);
 //@ini_set('display_errors','1'); @error_reporting(E_ALL & ~E_STRICT);
-@ini_set('display_errors','1'); @error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+@ini_set('display_errors', '1'); @error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
 /**
  * Set a default timezone to avoid PHP5 warnings
@@ -29,7 +29,9 @@ function _getSecuredRealPath($path, $depth_from_root = 1)
 {
     $ds = DIRECTORY_SEPARATOR;
     $parts = explode($ds, realpath('.'));
-    for ($i=0; $i<=$depth_from_root; $i++) array_pop($parts);
+    for ($i=0; $i<=$depth_from_root; $i++) {
+        array_pop($parts);
+    }
     return str_replace(join($ds, $parts), $ds.'[***]', $path);
 }
 
@@ -38,7 +40,7 @@ function _getSecuredRealPath($path, $depth_from_root = 1)
  */
 $arg_ln = isset($_GET['ln']) ? $_GET['ln'] : 'en';
 
-function getPhpClassManualLink( $class_name, $ln='en' )
+function getPhpClassManualLink($class_name, $ln='en')
 {
     return sprintf('http://php.net/manual/%s/class.%s.php', $ln, strtolower($class_name));
 }
@@ -49,7 +51,7 @@ if (file_exists($a = __DIR__.'/../vendor/autoload.php')) {
     die('You need to run Composer on your project to use this interface!');
 }
 
-$repo = !empty($_GET) && isset($_GET['repo']) ? $_GET['repo'] : 
+$repo = !empty($_GET) && isset($_GET['repo']) ? $_GET['repo'] :
     \Library\Helper\Url::resolvePath(__DIR__.'/..', true);
 
 // -----------------------------------
@@ -124,7 +126,6 @@ $repo = !empty($_GET) && isset($_GET['repo']) ? $_GET['repo'] :
 <pre>
 <?php
 if (!empty($repo)) {
-
     if (\Library\Helper\Url::isUrl($repo)) {
         $tmp_dir = __DIR__.'/tmp';
         if (!file_exists($tmp_dir)) {
@@ -191,7 +192,7 @@ if (!empty($repo)) {
 
     echo '<br />';
     $first_dir = null;
-    foreach($a->getTree() as $item) {
+    foreach ($a->getTree() as $item) {
         if ($item['type']==='tree') {
             $first_dir = $item['path'];
             break;
