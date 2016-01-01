@@ -2,7 +2,7 @@
 /**
  * This file is part of the GitApi package.
  *
- * Copyright (c) 2013-2015 Pierre Cassat <me@e-piwi.fr> and contributors
+ * Copyright (c) 2013-2016 Pierre Cassat <me@e-piwi.fr> and contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ class Repository
      */
     public function __construct($repository_path = null, $createNew = false, $_init = true)
     {
-        $this->setGitConsole( new GitCommand );
+        $this->setGitConsole(new GitCommand);
         if (is_string($repository_path)) {
             $this->setRepositoryPath($repository_path, $createNew, $_init);
         }
@@ -175,7 +175,9 @@ class Repository
                     if ($parent = realpath(dirname($repository_path))) {
                         mkdir($repository_path);
                         $this->repository_path = $repository_path;
-                        if ($_init) $this->run('init');
+                        if ($_init) {
+                            $this->run('init');
+                        }
                     } else {
                         throw new \Exception('Cannot create repository in non-existent directory');
                     }
@@ -243,7 +245,7 @@ class Repository
         return $history;
     }
 
-    protected function _parseCommitLog( $log_entry )
+    protected function _parseCommitLog($log_entry)
     {
         $commit=array();
         $response_items = explode("\n", $log_entry);
@@ -255,7 +257,7 @@ class Repository
                 if (strlen($subentry) && !$in_message) {
                     $commit[ $entry_index ] = $entry_value;
                     if ($entry_index==='date' || strpos($entry_index, 'date')) {
-                        $commit[ str_replace('date', 'DateTime', $entry_index) ] = new \DateTime( $entry_value );
+                        $commit[ str_replace('date', 'DateTime', $entry_index) ] = new \DateTime($entry_value);
                     } elseif ($entry_index==='message') {
                         $in_message = true;
                     }
@@ -267,7 +269,7 @@ class Repository
         return $commit;
     }
 
-    protected function _parseCommitChanges( $entry )
+    protected function _parseCommitChanges($entry)
     {
         $return = array();
         foreach (array_values(self::$file_status_flags) as $name) {
@@ -306,7 +308,7 @@ class Repository
         $data=array();
         if (!empty($response)) {
             foreach ($response as $entry) {
-                $commit = $this->_parseCommitLog( $entry );
+                $commit = $this->_parseCommitLog($entry);
                 if (!empty($commit)) {
                     if (isset($commit['commit-abbrev'])) {
                         $data[ $commit['commit-abbrev'] ] = $commit;
@@ -324,7 +326,7 @@ class Repository
     {
         $cmd_mask = 'log -1 --date=iso --pretty=format:%s'.(!is_null($path) ? ' -- '.$path : '');
         $cmd = sprintf($cmd_mask, "'".self::$full_pretty_format."'");
-        $data = $this->_parseCommitLog( $this->run($cmd) );
+        $data = $this->_parseCommitLog($this->run($cmd));
         array_filter($data);
         return $data;
     }
@@ -344,26 +346,26 @@ class Repository
             $diff = substr($result, $diffStart);
             $result = substr($result, 0, $diffStart);
         }
-        $data = $this->_parseCommitLog( $result );
+        $data = $this->_parseCommitLog($result);
         $data['changes'] = $this->getCommitChanges($hash);
-        $data['diff'] = $this->_parseCommitDiff( $diff );
+        $data['diff'] = $this->_parseCommitDiff($diff);
         array_filter($data);
         return $data;
     }
 
-    protected function _parseCommitDiff( $diff )
+    protected function _parseCommitDiff($diff)
     {
         $explode = explode("\n".'diff --git ', $diff);
         $data = array();
         if (!empty($explode)) {
-            foreach($explode as $file) {
+            foreach ($explode as $file) {
                 $data[] = $this->_parseCommitDiffEntry($file);
             }
         }
         return $data;
     }
 
-    static $file_status_flags = array(
+    public static $file_status_flags = array(
         'A'=>'addition',
         'D'=>'deletion',
         'R'=>'rename-edit',
@@ -373,10 +375,10 @@ class Repository
         'T'=>'type change',
         'X'=>'unknown'
     );
-    static $diff_from_file_starter = '--- ';
-    static $diff_to_file_starter = '+++ ';
-    static $diff_change_mask = '@@ \-([\d]+),([\d]+) \+([\d]+),([\d]+) @@(.*)?';
-    static $diff_modes = array(
+    public static $diff_from_file_starter = '--- ';
+    public static $diff_to_file_starter = '+++ ';
+    public static $diff_change_mask = '@@ \-([\d]+),([\d]+) \+([\d]+),([\d]+) @@(.*)?';
+    public static $diff_modes = array(
         'change file mode (from)'       =>array('type'=>'T', 'mask'=>'old mode ([\d]{6})'),
         'change file mode (to)'         =>array('type'=>'T', 'mask'=>'new mode ([\d]{6})'),
         'deleted file'                  =>array('type'=>'D', 'mask'=>'deleted file mode ([\d]{6})'),
@@ -390,13 +392,13 @@ class Repository
         'history'                       =>array('type'=>'', 'mask'=>'index ([a-z0-9]{7})\.\.([a-z0-9]{7})( [\d]{6})?')
     );
 
-    protected function _parseCommitDiffEntry( $diff )
+    protected function _parseCommitDiffEntry($diff)
     {
         $explode = explode("\n", $diff);
         $data = array('from_name'=>null, 'to_name'=>null, 'type'=>'M', 'diff'=>array());
         if (!empty($explode)) {
             $change = null;
-            foreach($explode as $i=>$line) {
+            foreach ($explode as $i=>$line) {
                 $matches=null;
                 // the from file name
                 if (self::$diff_from_file_starter===substr($line, 0, strlen(self::$diff_from_file_starter))) {
@@ -453,17 +455,17 @@ class Repository
 
     public function getCommitChanges($hash)
     {
-//        $cmd_mask = 'show %s --name-status --pretty="format:" --diff-filter="[A|D|M|R]" -M';
+        //        $cmd_mask = 'show %s --name-status --pretty="format:" --diff-filter="[A|D|M|R]" -M';
         $cmd_mask = 'show %s --name-status --pretty="format:" -M';
         $cmd = sprintf($cmd_mask, $hash);
-        $data = $this->_parseCommitChanges( $this->run($cmd) );
+        $data = $this->_parseCommitChanges($this->run($cmd));
         array_filter($data);
         return $data;
     }
 
     public function getCommitersList()
     {
-        $response = explode("\n", $this->run("log --format='%aN %ae'") );
+        $response = explode("\n", $this->run("log --format='%aN %ae'"));
         $data=array();
         if (!empty($response)) {
             foreach ($response as $entry) {
@@ -484,7 +486,9 @@ class Repository
 
     protected function _parseTreeEntry($entry)
     {
-        if (empty($entry)) return null;
+        if (empty($entry)) {
+            return null;
+        }
         $data = explode("\t", $entry);
         $tree = array();
         if (!empty($data)) {
@@ -506,7 +510,7 @@ class Repository
         $result = explode("\n", $this->run($cmd));
         $tree = array();
         if (!empty($result)) {
-            foreach($result as $i=>$entry) {
+            foreach ($result as $i=>$entry) {
                 $tree_entry = $this->_parseTreeEntry($entry);
                 if (!empty($tree_entry)) {
                     $tree[] = $tree_entry;
@@ -523,7 +527,7 @@ class Repository
         $result = explode("\n", $this->run($cmd));
         $tree = array();
         if (!empty($result)) {
-            foreach($result as $i=>$entry) {
+            foreach ($result as $i=>$entry) {
                 $tree_entry = $this->_parseTreeEntry($entry);
                 if (!empty($tree_entry)) {
                     $tree[] = $tree_entry;
@@ -540,7 +544,7 @@ class Repository
         $result = explode("\n", $this->run($cmd));
         $files = array();
         if (!empty($result)) {
-            foreach($result as $i=>$entry) {
+            foreach ($result as $i=>$entry) {
                 if (!empty($entry)) {
                     $items = explode(' ', $entry);
                     $files[$items[0]] = $items[1];
@@ -693,7 +697,7 @@ class Repository
     public function getBranchesList($keep_asterisk = false)
     {
         $branchArray = explode("\n", $this->run("branch"));
-        foreach($branchArray as $i => &$branch) {
+        foreach ($branchArray as $i => &$branch) {
             $branch = trim($branch);
             if (! $keep_asterisk) {
                 $branch = str_replace("* ", "", $branch);
@@ -763,16 +767,19 @@ class Repository
 
     public function getTagsList()
     {
-//		return array_filter( explode("\n", $this->run("describe --tags --abbrev=0")) );
+        //		return array_filter( explode("\n", $this->run("describe --tags --abbrev=0")) );
         $result = explode("\n", $this->run("tag -l -n"));
         $results=array();
-        foreach($result as $_tag) {
+        foreach ($result as $_tag) {
             if (!empty($_tag)) {
                 $_tag_infos = explode(" ", $_tag);
                 $tag_name = $tag_message = '';
-                foreach($_tag_infos as $i=>$_info) {
-                    if ($i===0) $tag_name = $_info;
-                    elseif (!empty($_info)) $tag_message .= ' '.$_info;
+                foreach ($_tag_infos as $i=>$_info) {
+                    if ($i===0) {
+                        $tag_name = $_info;
+                    } elseif (!empty($_info)) {
+                        $tag_message .= ' '.$_info;
+                    }
                 }
                 $results[] = array(
                     'tag_name' => trim($tag_name),
@@ -795,7 +802,9 @@ class Repository
                 sprintf('Target "%s" is not a directory or is not writable!', $target_dir)
             );
         }
-        if ($target_file==='auto') $target_file = $tagname.'.'.$format;
+        if ($target_file==='auto') {
+            $target_file = $tagname.'.'.$format;
+        }
         $target_realpath = rtrim($target_dir, '/').'/'.$target_file;
         $cmd = 'archive --format='.$format.' '.$tagname.' > '.$target_realpath;
         $this->run($cmd);
@@ -814,7 +823,9 @@ class Repository
                 sprintf('Target "%s" is not a directory or is not writable!', $target_dir)
             );
         }
-        if (!strpos($target_file, $format)) $target_file .= '.'.$format;
+        if (!strpos($target_file, $format)) {
+            $target_file .= '.'.$format;
+        }
         $target_realpath = rtrim($target_dir, '/').'/'.$target_file;
         $cmd = 'archive --format='.$format.' '.$scope.' > '.$target_realpath;
         $this->run($cmd);
@@ -887,7 +898,4 @@ class Repository
         $_f = $this->repository_path."/.git/description";
         return file_exists($_f) ? file_get_contents($_f) : null;
     }
-
 }
-
-// Endfile

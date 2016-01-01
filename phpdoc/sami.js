@@ -1,8 +1,9 @@
+
 (function(root) {
 
     var bhIndex = null;
     var rootPath = '';
-    var treeHtml = '    <ul>                <li data-name="namespace:GitApi" class="opened">                    <div style="padding-left:0px" class="hd">                        <span class="glyphicon glyphicon-play"></span><a href="GitApi.html">GitApi</a>                    </div>                    <div class="bd">                            <ul>                <li data-name="class:GitApi_GitApi" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/GitApi.html">GitApi</a>                    </div>                </li>                            <li data-name="class:GitApi_GitCommand" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/GitCommand.html">GitCommand</a>                    </div>                </li>                            <li data-name="class:GitApi_GitRuntimeException" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/GitRuntimeException.html">GitRuntimeException</a>                    </div>                </li>                            <li data-name="class:GitApi_Repository" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/Repository.html">Repository</a>                    </div>                </li>                </ul></div>                </li>                </ul>';
+    var treeHtml = '        <ul>                <li data-name="namespace:GitApi" class="opened">                    <div style="padding-left:0px" class="hd">                        <span class="glyphicon glyphicon-play"></span><a href="GitApi.html">GitApi</a>                    </div>                    <div class="bd">                                <ul>                <li data-name="class:GitApi_GitApi" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/GitApi.html">GitApi</a>                    </div>                </li>                            <li data-name="class:GitApi_GitCommand" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/GitCommand.html">GitCommand</a>                    </div>                </li>                            <li data-name="class:GitApi_GitRuntimeException" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/GitRuntimeException.html">GitRuntimeException</a>                    </div>                </li>                            <li data-name="class:GitApi_Repository" class="opened">                    <div style="padding-left:26px" class="hd leaf">                        <a href="GitApi/Repository.html">Repository</a>                    </div>                </li>                </ul></div>                </li>                </ul>';
 
     var searchTypeClasses = {
         'Namespace': 'label-default',
@@ -14,7 +15,8 @@
     };
 
     var searchIndex = [
-                    {"type": "Namespace", "link": "GitApi.html", "name": "GitApi", "doc": "Namespace GitApi"},
+                    
+            {"type": "Namespace", "link": "GitApi.html", "name": "GitApi", "doc": "Namespace GitApi"},
             
             {"type": "Class", "fromName": "GitApi", "fromLink": "GitApi.html", "link": "GitApi/GitApi.html", "name": "GitApi\\GitApi", "doc": "&quot;Largely inspired from &lt;a href=\&quot;http:\/\/github.com\/kbjr\/Git.php\&quot;&gt;http:\/\/github.com\/kbjr\/Git.php&lt;\/a&gt;&quot;"},
                                                         {"type": "Method", "fromName": "GitApi\\GitApi", "fromLink": "GitApi/GitApi.html", "link": "GitApi/GitApi.html#method_setBin", "name": "GitApi\\GitApi::setBin", "doc": "&quot;Sets git executable path&quot;"},
